@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Albert Escrichs | Portfolio & CV</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-navy: #1a2b4c;
+            --accent-magenta: #d81b60;
+            --light-bg: #f4f7f6;
+            --text-main: #333;
+            --text-light: #666;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            background-color: var(--light-bg);
+            color: var(--text-main);
+        }
+
+        /* UI: Layout de dos columnas para escritorio */
+        .container {
+            max-width: 1000px;
+            margin: 20px auto;
+            background: #fff;
+            display: flex;
+            flex-wrap: wrap;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        /* Sidebar con Look & Feel original */
+        .sidebar {
+            flex: 1 1 300px;
+            background-color: var(--primary-navy);
+            color: #fff;
+            padding: 40px 30px;
+            text-align: center;
+        }
+
+        .profile-img {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            border: 5px solid var(--accent-magenta);
+            object-fit: cover;
+            margin-bottom: 20px;
+        }
+
+        .social-links a {
+            color: #fff;
+            font-size: 1.5rem;
+            margin: 0 10px;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .social-links a:hover { color: var(--accent-magenta); }
+
+        /* Main Content */
+        .main-content {
+            flex: 2 1 600px;
+            padding: 40px;
+        }
+
+        h1 { margin: 0; color: #fff; font-size: 2.2rem; text-transform: uppercase; }
+        .subtitle { color: var(--accent-magenta); font-weight: bold; margin-bottom: 20px; }
+        h2 { border-left: 4px solid var(--accent-magenta); padding-left: 10px; color: var(--primary-navy); text-transform: uppercase; font-size: 1.2rem; margin-top: 30px; }
+
+        /* UX: Timeline para experiencia laboral */
+        .job { margin-bottom: 25px; }
+        .job-title { font-weight: bold; color: var(--primary-navy); display: block; }
+        .job-meta { font-size: 0.9rem; color: var(--text-light); font-style: italic; }
+        .job-desc { margin-top: 8px; font-size: 0.95rem; text-align: justify; }
+
+        /* UX: Chips para habilidades */
+        .skills-container { display: flex; flex-wrap: wrap; gap: 8px; }
+        .skill-chip { background: #eee; padding: 5px 12px; border-radius: 15px; font-size: 0.85rem; color: var(--primary-navy); }
+
+        @media (max-width: 768px) {
+            .container { margin: 0; }
+            .sidebar, .main-content { flex: 1 1 100%; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <aside class="sidebar">
+        <img src="tu-foto.jpg" alt="Albert Escrichs" class="profile-img">
+        <h1>Albert Escrichs</h1>
+        <p class="subtitle">UX/UI Designer & Marketing Specialist</p>
+        
+        <div class="social-links">
+            <a href="https://linkedin.com/in/albertescrichs"><i class="fab fa-linkedin"></i></a>
+            <a href="https://behance.net/AlbertEscrichs"><i class="fab fa-behance"></i></a>
+            <a href="mailto:albertescrichs@gmail.com"><i class="fas fa-envelope"></i></a>
+        </div>
+
+        <h2>Contacto</h2>
+        <p><i class="fas fa-map-marker-alt"></i> Granada, España [cite: 47]</p>
+        <p><i class="fas fa-phone"></i> 665 02 90 03 [cite: 47]</p>
+
+        <h2>Idiomas</h2>
+        <p>Castellano/Catalán (Nativo) [cite: 21, 23]<br>Inglés (Conversación) [cite: 25]</p>
+
+        <h2>Software [cite: 27, 28]</h2>
+        <div class="skills-container">
+            <span class="skill-chip">Figma [cite: 15]</span>
+            <span class="skill-chip">Adobe XD [cite: 14]</span>
+            <span class="skill-chip">Creative Cloud [cite: 29]</span>
+            <span class="skill-chip">HTML5/CSS3 [cite: 36]</span>
+            <span class="skill-chip">Oracle Eloqua [cite: 34]</span>
+        </div>
+    </aside>
+
+    <main class="main-content">
+        <h2>Experiencia Reciente</h2>
+        
+        <div class="job">
+            <span class="job-title">Corporate Marketing Senior Specialist</span>
+            <span class="job-meta">Giunti Psychometrics | Actualidad</span>
+            <p class="job-desc">
+                Liderazgo de la estrategia global de branding y coherencia de marca en mercados internacionales. 
+                Coordinación de campañas corporativas y eventos de alto impacto (ferias, lanzamientos) asegurando la cobertura mediática y alineación con valores corporativos.
+            </p>
+        </div>
+
+        <div class="job">
+            <span class="job-title">Senior Marketing Specialist & Graphic Designer</span>
+            <span class="job-meta">Experian | 2021 - 2023 [cite: 76, 81]</span>
+            <p class="job-desc">
+                Gestión de lanzamientos de productos y análisis de datos mediante investigación y encuestas[cite: 78, 79]. 
+                Administración de contenidos web y producción de eventos[cite: 80, 81].
+            </p>
+        </div>
+
+        <div class="job">
+            <span class="job-title">Senior Graphic Designer</span>
+            <span class="job-meta">Axesor | 2014 - 2021 [cite: 72, 75]</span>
+            <p class="job-desc">
+                Responsable de branding y diseño UX/UI de productos digitales para diversas líneas de negocio[cite: 73, 74].
+            </p>
+        </div>
+
+        <h2>Educación Superior [cite: 4]</h2>
+        <div class="job">
+            <span class="job-title">Máster Animación 3D</span>
+            <span class="job-meta">Universidad de Granada [cite: 5]</span>
+        </div>
+        <div class="job">
+            <span class="job-title">Diplomatura Diseño Gráfico</span>
+            <span class="job-meta">EAG Granada [cite: 6, 7]</span>
+        </div>
+
+        <h2>Habilidades Clave [cite: 88]</h2>
+        <div class="skills-container">
+            <span class="skill-chip">Motion Graphics</span>
+            <span class="skill-chip">Dirección de Arte</span>
+            <span class="skill-chip">Frontend Dev</span>
+            <span class="skill-chip">Branding Global</span>
+        </div>
+    </main>
+</div>
+
+</body>
+</html>
