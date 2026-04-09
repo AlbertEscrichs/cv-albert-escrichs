@@ -3,567 +3,923 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>CV – Albert Escrichs</title>
+<title>Albert Escrichs — CV</title>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
 
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
   :root {
-    --bg: #0d0d0d;
-    --surface: #161616;
-    --border: #2a2a2a;
     --pink: #e0007f;
-    --pink-soft: rgba(224,0,127,0.12);
-    --white: #f5f5f5;
+    --pink-light: #fff0f7;
+    --dark: #0d0d0d;
+    --mid: #444;
     --gray: #888;
-    --gray2: #555;
+    --border: #e8e8e8;
+    --bg: #fafafa;
+    --white: #ffffff;
   }
 
-  body {
+  html, body {
     font-family: 'Inter', sans-serif;
-    background: #222;
-    color: var(--white);
-    font-size: 11px;
-    line-height: 1.5;
+    background: var(--bg);
+    color: var(--dark);
+    font-size: 13px;
+    line-height: 1.6;
     -webkit-font-smoothing: antialiased;
+    width: 100%;
   }
 
   /* ── PRINT ── */
   @media print {
-    body { background: #0d0d0d; }
-    .page { margin: 0 !important; box-shadow: none !important; }
     .no-print { display: none !important; }
+    body { background: #fff; }
+    .page { box-shadow: none !important; margin: 0 !important; max-width: 100% !important; border-radius: 0 !important; }
+    .hero { min-height: auto !important; }
   }
 
-  /* ── PRINT BTN ── */
   .no-print {
-    text-align: center; padding: 14px; background: #111;
-    position: sticky; top: 0; z-index: 100;
+    position: sticky; top: 0; z-index: 200;
+    background: rgba(255,255,255,0.92);
+    backdrop-filter: blur(8px);
     border-bottom: 1px solid var(--border);
+    padding: 12px 48px;
+    display: flex; align-items: center; justify-content: space-between;
   }
+  .no-print .np-logo { font-size: 13px; font-weight: 800; letter-spacing: -.3px; color: var(--dark); }
   .no-print button {
     background: var(--pink); color: #fff; border: none;
-    padding: 9px 26px; font-family: inherit; font-weight: 700;
+    padding: 8px 22px; font-family: inherit; font-weight: 700;
     font-size: 11px; cursor: pointer; border-radius: 100px;
-    letter-spacing: .5px; transition: opacity .2s;
+    letter-spacing: .3px; transition: opacity .2s;
   }
-  .no-print button:hover { opacity: .85; }
+  .no-print button:hover { opacity: .82; }
 
-  /* ── PAGE ── */
+  /* ── PAGE WRAPPER ── */
   .page {
-    width: 794px; min-height: 1123px;
-    margin: 0 auto 2px;
-    background: var(--bg);
-    padding: 52px 52px 48px;
+    max-width: 1100px;
+    margin: 0 auto;
+    background: var(--white);
+    box-shadow: 0 0 0 1px var(--border), 0 8px 48px rgba(0,0,0,.06);
+    border-radius: 12px;
+    overflow: hidden;
+    margin-bottom: 40px;
+  }
+
+  /* ══════════════════════════════
+     HERO
+  ══════════════════════════════ */
+  .hero {
+    display: grid;
+    grid-template-columns: 1fr 380px;
+    min-height: 420px;
     position: relative;
     overflow: hidden;
   }
 
-  /* subtle bg accent */
-  .page::before {
-    content: '';
+  .hero-left {
+    padding: 56px 52px 48px;
+    display: flex; flex-direction: column; justify-content: space-between;
+    background: var(--white);
+    position: relative; z-index: 2;
+  }
+
+  .hero-eyebrow {
+    display: flex; align-items: center; gap: 10px;
+    font-size: 11px; font-weight: 600; letter-spacing: 2px;
+    text-transform: uppercase; color: var(--pink);
+    margin-bottom: 20px;
+  }
+  .hero-eyebrow span {
+    display: inline-block; width: 28px; height: 1.5px; background: var(--pink);
+  }
+
+  .hero-name {
+    font-size: clamp(44px, 6vw, 72px);
+    font-weight: 900;
+    line-height: .95;
+    letter-spacing: -3px;
+    color: var(--dark);
+    margin-bottom: 4px;
+  }
+
+  .hero-name em {
+    font-style: normal;
+    color: var(--pink);
+  }
+
+  .hero-roles {
+    margin-top: 22px;
+    display: flex; flex-wrap: wrap; gap: 8px;
+  }
+
+  .pill {
+    display: inline-flex; align-items: center; gap: 6px;
+    border: 1.5px solid var(--border);
+    border-radius: 100px;
+    padding: 5px 14px 5px 10px;
+    font-size: 11px; font-weight: 600; color: var(--mid);
+    background: var(--white);
+    transition: border-color .2s, color .2s;
+  }
+  .pill:hover { border-color: var(--pink); color: var(--pink); }
+  .pill svg { width: 14px; height: 14px; flex-shrink: 0; }
+  .pill-pink {
+    border-color: var(--pink);
+    color: var(--pink);
+    background: var(--pink-light);
+  }
+
+  .hero-summary {
+    margin-top: 28px;
+    font-size: 13px; color: var(--mid); line-height: 1.8;
+    max-width: 480px;
+    border-left: 2px solid var(--pink);
+    padding-left: 16px;
+  }
+  .hero-summary strong { color: var(--dark); }
+
+  .hero-contact-bar {
+    margin-top: 32px;
+    display: flex; flex-wrap: wrap; gap: 16px;
+    font-size: 11px; color: var(--gray);
+    align-items: center;
+  }
+  .hero-contact-bar a {
+    color: var(--mid); text-decoration: none; font-weight: 500;
+    display: flex; align-items: center; gap: 5px;
+    transition: color .2s;
+  }
+  .hero-contact-bar a:hover { color: var(--pink); }
+  .hero-contact-bar svg { width: 13px; height: 13px; }
+
+  .hero-right {
+    position: relative;
+    background: var(--border);
+    overflow: hidden;
+  }
+  .hero-photo-placeholder {
+    width: 100%; height: 100%;
+    background: linear-gradient(160deg, #f0f0f0 0%, #e0e0e0 100%);
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    gap: 8px; color: var(--gray); font-size: 11px;
+  }
+  .hero-photo-placeholder svg { width: 36px; height: 36px; opacity: .4; }
+
+  /* Badge flotante */
+  .hero-badge {
     position: absolute;
-    top: -120px; right: -120px;
-    width: 380px; height: 380px;
-    border-radius: 50%;
-    background: radial-gradient(circle, rgba(224,0,127,0.07) 0%, transparent 70%);
+    bottom: 24px; left: -20px;
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 12px 18px;
+    box-shadow: 0 4px 24px rgba(0,0,0,.10);
+    font-size: 11px; color: var(--mid);
+    z-index: 10;
+  }
+  .hero-badge strong { display: block; font-size: 20px; font-weight: 900; color: var(--pink); line-height: 1; }
+
+  /* ══════════════════════════════
+     STATS BAR
+  ══════════════════════════════ */
+  .stats-bar {
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+  .stat-item {
+    padding: 24px 32px;
+    border-right: 1px solid var(--border);
+  }
+  .stat-item:last-child { border-right: none; }
+  .stat-num {
+    font-size: 36px; font-weight: 900; color: var(--dark);
+    letter-spacing: -2px; line-height: 1;
+  }
+  .stat-num span { color: var(--pink); }
+  .stat-label { font-size: 11px; color: var(--gray); margin-top: 4px; font-weight: 500; }
+
+  /* ══════════════════════════════
+     SECTIONS
+  ══════════════════════════════ */
+  .section { padding: 52px 52px; border-bottom: 1px solid var(--border); }
+  .section:last-child { border-bottom: none; }
+
+  .section-header {
+    display: flex; align-items: baseline;
+    justify-content: space-between;
+    margin-bottom: 32px;
+  }
+
+  .section-label {
+    font-size: 10px; font-weight: 700; letter-spacing: 2px;
+    text-transform: uppercase; color: var(--pink);
+    display: flex; align-items: center; gap: 8px;
+  }
+  .section-label::before {
+    content: ''; display: inline-block;
+    width: 20px; height: 1.5px; background: var(--pink);
+  }
+
+  h2.section-title {
+    font-size: 28px; font-weight: 900; letter-spacing: -1px;
+    color: var(--dark); line-height: 1.1;
+  }
+
+  /* ══════════════════════════════
+     ESPECIALIZACIÓN
+  ══════════════════════════════ */
+  .spec-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+  .spec-card {
+    border: 1.5px solid var(--border);
+    border-radius: 12px;
+    padding: 24px 22px;
+    transition: border-color .2s, box-shadow .2s;
+    position: relative; overflow: hidden;
+  }
+  .spec-card:hover {
+    border-color: var(--pink);
+    box-shadow: 0 4px 24px rgba(224,0,127,.08);
+  }
+  .spec-card::after {
+    content: '';
+    position: absolute; bottom: 0; left: 0; right: 0;
+    height: 3px; background: var(--pink);
+    transform: scaleX(0); transform-origin: left;
+    transition: transform .3s;
+  }
+  .spec-card:hover::after { transform: scaleX(1); }
+
+  .spec-icon {
+    width: 40px; height: 40px;
+    background: var(--pink-light);
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 14px;
+  }
+  .spec-icon svg { width: 20px; height: 20px; color: var(--pink); }
+
+  .spec-num-label {
+    font-size: 9px; font-weight: 700; letter-spacing: 1.5px;
+    text-transform: uppercase; color: var(--pink); margin-bottom: 6px;
+  }
+  h3.spec-title {
+    font-size: 15px; font-weight: 800; color: var(--dark);
+    letter-spacing: -.3px; margin-bottom: 8px; line-height: 1.2;
+  }
+  .spec-desc {
+    font-size: 11px; color: var(--gray); line-height: 1.7; margin-bottom: 14px;
+  }
+  .spec-tags { display: flex; flex-wrap: wrap; gap: 5px; }
+  .tag {
+    font-size: 9.5px; font-weight: 500; color: var(--mid);
+    background: var(--bg); border: 1px solid var(--border);
+    border-radius: 100px; padding: 3px 10px;
+  }
+
+  /* ══════════════════════════════
+     EXPERIENCIA
+  ══════════════════════════════ */
+  .exp-list { display: flex; flex-direction: column; gap: 0; }
+
+  .exp-row {
+    display: grid;
+    grid-template-columns: 220px 1fr 140px;
+    gap: 24px;
+    padding: 22px 0;
+    border-bottom: 1px solid var(--border);
+    align-items: start;
+  }
+  .exp-row:last-child { border-bottom: none; }
+
+  .exp-co-block {}
+  h3.exp-co {
+    font-size: 14px; font-weight: 800; color: var(--dark);
+    letter-spacing: -.3px; margin-bottom: 3px;
+  }
+  .exp-loc {
+    font-size: 10.5px; color: var(--gray);
+    display: flex; align-items: center; gap: 4px;
+  }
+  .exp-loc svg { width: 11px; height: 11px; }
+
+  .exp-content {}
+  h4.exp-role {
+    font-size: 12px; font-weight: 700; color: var(--pink);
+    margin-bottom: 6px;
+  }
+  .exp-desc {
+    font-size: 11px; color: var(--mid); line-height: 1.7;
+  }
+
+  .exp-date-badge {
+    display: inline-flex; align-items: center; gap: 5px;
+    background: var(--bg); border: 1px solid var(--border);
+    border-radius: 100px; padding: 5px 12px;
+    font-size: 10px; font-weight: 600; color: var(--mid);
+    white-space: nowrap;
+  }
+  .exp-date-badge svg { width: 11px; height: 11px; color: var(--gray); }
+  .exp-current { border-color: var(--pink); color: var(--pink); background: var(--pink-light); }
+  .exp-current svg { color: var(--pink); }
+
+  /* ══════════════════════════════
+     SKILLS GRID
+  ══════════════════════════════ */
+  .skills-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+  }
+  .skill-card {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 16px 18px;
+    display: flex; gap: 12px; align-items: flex-start;
+  }
+  .skill-icon {
+    width: 32px; height: 32px; flex-shrink: 0;
+    background: var(--pink-light);
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .skill-icon svg { width: 16px; height: 16px; color: var(--pink); }
+  h4.skill-title {
+    font-size: 11px; font-weight: 700; color: var(--dark);
+    margin-bottom: 3px;
+  }
+  .skill-desc { font-size: 10px; color: var(--gray); line-height: 1.6; }
+
+  /* ══════════════════════════════
+     BOTTOM GRID
+  ══════════════════════════════ */
+  .bottom-grid {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr 1fr;
+    gap: 40px;
+  }
+
+  h3.sub-title {
+    font-size: 13px; font-weight: 800; color: var(--dark);
+    letter-spacing: -.2px; margin-bottom: 16px;
+  }
+
+  .edu-item { margin-bottom: 16px; padding-bottom: 16px; border-bottom: 1px solid var(--border); }
+  .edu-item:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+  h4.edu-degree { font-size: 11px; font-weight: 700; color: var(--dark); line-height: 1.4; margin-bottom: 3px; }
+  .edu-school { font-size: 10px; color: var(--gray); display: flex; align-items: center; gap: 5px; }
+  .edu-date { color: var(--pink); font-weight: 600; }
+
+  .lang-item {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 10px 0; border-bottom: 1px solid var(--border);
+  }
+  .lang-item:last-child { border-bottom: none; }
+  .lang-name { font-size: 12px; font-weight: 700; color: var(--dark); }
+  .lang-level { font-size: 10px; color: var(--pink); font-weight: 600; }
+
+  .comp-wrap { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 4px; }
+
+  /* ══════════════════════════════
+     CONTACT SECTION
+  ══════════════════════════════ */
+  .contact-section {
+    background: var(--dark);
+    padding: 64px 52px 52px;
+    position: relative; overflow: hidden;
+  }
+  .contact-section::before {
+    content: '';
+    position: absolute; top: -80px; right: -80px;
+    width: 300px; height: 300px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(224,0,127,.18) 0%, transparent 70%);
     pointer-events: none;
   }
 
-  /* ── UTILITIES ── */
-  .tag {
-    display: inline-block;
-    border: 1px solid var(--border);
-    color: var(--gray);
-    font-size: 8.5px; font-weight: 500;
-    padding: 3px 10px; border-radius: 100px;
-    letter-spacing: .3px;
+  .contact-label {
+    font-size: 10px; font-weight: 700; letter-spacing: 2.5px;
+    text-transform: uppercase; color: var(--pink);
+    display: flex; align-items: center; gap: 8px;
+    margin-bottom: 12px;
   }
-  .tag-pink {
-    border-color: var(--pink);
-    color: var(--pink);
-    background: var(--pink-soft);
-  }
-  .divider {
-    border: none;
-    border-top: 1px solid var(--border);
-    margin: 24px 0;
-  }
-  .label {
-    font-size: 8.5px; font-weight: 700;
-    letter-spacing: 1.5px; text-transform: uppercase;
-    color: var(--gray); margin-bottom: 12px;
+  .contact-label::before {
+    content: ''; width: 20px; height: 1.5px; background: var(--pink);
   }
 
-  /* ══════════ PAGE 1 ══════════ */
+  .contact-headline {
+    font-size: clamp(36px, 5vw, 60px);
+    font-weight: 900;
+    letter-spacing: -2px;
+    line-height: .95;
+    color: var(--white);
+    margin-bottom: 40px;
+  }
+  .contact-headline em { font-style: normal; color: var(--pink); }
 
-  /* HEADER */
-  .header {
+  .contact-grid {
     display: grid;
-    grid-template-columns: 100px 1fr auto;
-    gap: 28px;
-    align-items: start;
-    margin-bottom: 36px;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    align-items: end;
   }
 
-  .photo-wrap {
-    width: 90px; height: 90px;
-    border-radius: 50%;
-    overflow: hidden;
-    border: 1.5px solid var(--border);
-    background: var(--surface);
-    flex-shrink: 0;
+  .contact-items { display: flex; flex-direction: column; gap: 16px; }
+  .contact-item {
+    display: flex; align-items: center; gap: 14px;
   }
-  .photo-placeholder {
-    width: 100%; height: 100%;
+  .contact-item-icon {
+    width: 40px; height: 40px; flex-shrink: 0;
+    border: 1px solid rgba(255,255,255,.12);
+    border-radius: 10px;
     display: flex; align-items: center; justify-content: center;
-    color: var(--gray2); font-size: 8px; text-align: center;
   }
+  .contact-item-icon svg { width: 18px; height: 18px; color: var(--pink); }
+  .contact-item-label { font-size: 9.5px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; color: rgba(255,255,255,.35); margin-bottom: 2px; }
+  .contact-item-val { font-size: 12px; font-weight: 600; color: var(--white); }
+  .contact-item-val a { color: var(--white); text-decoration: none; transition: color .2s; }
+  .contact-item-val a:hover { color: var(--pink); }
 
-  .header-center {}
-  .header-name {
-    font-size: 32px; font-weight: 900;
-    color: var(--white); line-height: 1;
-    letter-spacing: -1px; margin-bottom: 8px;
-  }
-  .header-roles {
-    display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 14px;
-  }
-  .header-contact {
-    font-size: 9.5px; color: var(--gray); line-height: 2;
-  }
-  .header-contact a { color: var(--pink); text-decoration: none; }
-
-  .header-right {
-    text-align: right;
-    padding-top: 4px;
-  }
-  .logo-e {
-    font-size: 32px; font-weight: 900;
-    color: var(--white); letter-spacing: -3px; line-height: 1;
-  }
-  .logo-name {
-    font-size: 7px; font-weight: 700;
-    letter-spacing: 4px; color: var(--gray);
-  }
-
-  /* PERFIL */
-  .perfil {
-    border: 1px solid var(--border);
-    border-left: 3px solid var(--pink);
-    background: var(--surface);
-    padding: 16px 20px;
-    border-radius: 4px;
-    margin-bottom: 28px;
-  }
-  .perfil p {
-    font-size: 10.5px; color: #ccc; line-height: 1.8;
-  }
-  .perfil strong { color: var(--white); }
-
-  /* SPEC GRID */
-  .spec-grid {
-    display: grid; grid-template-columns: repeat(3, 1fr);
-    gap: 1px; background: var(--border);
-    border: 1px solid var(--border);
-    border-radius: 6px; overflow: hidden;
-    margin-bottom: 28px;
-  }
-  .spec-card {
-    background: var(--surface);
-    padding: 18px 16px;
-  }
-  .spec-num {
-    font-size: 9px; font-weight: 700; color: var(--pink);
-    letter-spacing: 1px; margin-bottom: 6px;
-  }
-  .spec-card-title {
-    font-size: 12px; font-weight: 800; color: var(--white);
-    margin-bottom: 8px; letter-spacing: -.2px;
-  }
-  .spec-card-desc {
-    font-size: 9px; color: var(--gray); line-height: 1.6; margin-bottom: 12px;
-  }
-  .spec-tools { display: flex; flex-wrap: wrap; gap: 4px; }
-
-  /* SKILLS */
-  .skills-grid {
-    display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px;
-  }
-  .skill-card {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 4px;
-    padding: 12px 14px;
-  }
-  .skill-title {
-    font-size: 9px; font-weight: 700; color: var(--white);
-    text-transform: uppercase; letter-spacing: .8px; margin-bottom: 5px;
-  }
-  .skill-desc { font-size: 9px; color: var(--gray); line-height: 1.6; }
-  .skill-link { color: var(--pink); }
-
-  /* ══════════ PAGE 2 ══════════ */
-
-  .p2-header {
-    display: flex; justify-content: space-between; align-items: center;
-    margin-bottom: 28px; padding-bottom: 18px;
-    border-bottom: 1px solid var(--border);
-  }
-  .p2-name { font-size: 16px; font-weight: 900; color: var(--white); letter-spacing: -.5px; }
-  .p2-sub { font-size: 9px; color: var(--gray); margin-top: 3px; }
-
-  /* EXP TABLE */
-  .exp-table { width: 100%; border-collapse: collapse; }
-  .exp-table thead tr {
-    border-bottom: 1px solid var(--border);
-  }
-  .exp-table th {
-    font-size: 8.5px; font-weight: 700; letter-spacing: 1.2px;
-    text-transform: uppercase; color: var(--gray);
-    padding: 0 0 10px; text-align: left;
-  }
-  .exp-table th:last-child { text-align: right; }
-  .exp-table tbody tr {
-    border-bottom: 1px solid var(--border);
-  }
-  .exp-table tbody tr:last-child { border-bottom: none; }
-  .exp-table td {
-    padding: 12px 0; vertical-align: top;
-  }
-  .exp-table td:last-child { text-align: right; white-space: nowrap; }
-  .exp-co {
-    font-size: 11px; font-weight: 800; color: var(--white);
-    letter-spacing: -.2px;
-  }
-  .exp-loc { font-size: 9px; color: var(--gray); margin-top: 1px; }
-  .exp-role-text {
-    font-size: 9.5px; color: var(--pink); font-weight: 600; margin-bottom: 4px;
-  }
-  .exp-desc-text {
-    font-size: 9px; color: var(--gray); line-height: 1.6; max-width: 380px;
-  }
-  .exp-date-text {
-    font-size: 9px; color: var(--gray2);
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 100px; padding: 2px 9px;
-    display: inline-block;
-  }
-
-  /* BOTTOM GRID */
-  .p2-bottom {
-    display: grid; grid-template-columns: 1.2fr 1fr 1fr;
-    gap: 28px; margin-top: 6px;
-  }
-
-  .edu-item { margin-bottom: 12px; }
-  .edu-degree { font-size: 9.5px; font-weight: 700; color: var(--white); line-height: 1.4; }
-  .edu-school { font-size: 9px; color: var(--gray); }
-  .edu-date { color: var(--pink); }
-
-  .lang-item { margin-bottom: 9px; }
-  .lang-name { font-size: 10px; font-weight: 700; color: var(--white); }
-  .lang-level { font-size: 9px; color: var(--pink); }
-
-  .data-row { margin-bottom: 9px; }
-  .data-label { font-size: 8px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--gray2); margin-bottom: 2px; }
-  .data-val { font-size: 9.5px; color: var(--gray); }
-  .data-val a { color: var(--pink); text-decoration: none; }
-
-  .comp-wrap { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 2px; }
+  .contact-right { text-align: right; }
+  .contact-logo-e { font-size: 52px; font-weight: 900; color: rgba(255,255,255,.06); letter-spacing: -4px; line-height: 1; }
+  .contact-logo-name { font-size: 9px; font-weight: 700; letter-spacing: 5px; color: rgba(255,255,255,.2); }
+  .contact-copy { font-size: 10px; color: rgba(255,255,255,.25); margin-top: 16px; }
 </style>
 </head>
 <body>
 
+<!-- NAV BAR -->
 <div class="no-print">
-  <button onclick="window.print()">🖨️ Imprimir / Guardar PDF</button>
+  <div class="np-logo">Ǝ ESCRICHS</div>
+  <div style="display:flex;gap:24px;align-items:center;font-size:11px;color:#888;">
+    <span>Digital Project Manager</span>
+    <span style="color:#e0e0e0;">·</span>
+    <span>Senior Marketing Specialist</span>
+    <span style="color:#e0e0e0;">·</span>
+    <span>UX/UI Designer</span>
+  </div>
+  <button onclick="window.print()">↓ Descargar PDF</button>
 </div>
 
-<!-- ══════════════ PAGE 1 ══════════════ -->
 <div class="page">
 
-  <!-- HEADER -->
-  <div class="header">
-    <div class="photo-wrap">
-      <div class="photo-placeholder">Foto<br>perfil</div>
-    </div>
-    <div class="header-center">
-      <div class="header-name">ALBERT<br>ESCRICHS</div>
-      <div class="header-roles">
-        <span class="tag tag-pink">Digital Project Manager</span>
-        <span class="tag tag-pink">Senior Marketing Specialist</span>
-        <span class="tag tag-pink">UX / UI Designer</span>
+  <!-- ══ HERO ══ -->
+  <div class="hero">
+    <div class="hero-left">
+      <div>
+        <div class="hero-eyebrow">
+          <span></span>
+          CV 2025 · Granada, España
+        </div>
+        <h1 class="hero-name">ALBERT<br><em>ESCRICHS</em></h1>
+        <div class="hero-roles">
+          <span class="pill pill-pink">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 17H7A5 5 0 0 1 7 7h2M15 7h2a5 5 0 0 1 0 10h-2M11 12h2"/></svg>
+            Digital Project Manager
+          </span>
+          <span class="pill">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 20h9M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+            Senior Marketing Specialist
+          </span>
+          <span class="pill">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M3 9h18M9 21V9"/></svg>
+            UX / UI Designer
+          </span>
+        </div>
+        <p class="hero-summary">
+          Profesional creativo y estratégico con <strong>+15 años de experiencia</strong> en marketing digital, gestión de proyectos y diseño UX/UI. Historial demostrado liderando equipos y proyectos end-to-end para <strong>Experian</strong> y <strong>Giunti Psychometrics</strong>. Orientado a resultados, con sólida capacidad analítica.
+        </p>
       </div>
-      <div class="header-contact">
-        <span>📍 Granada, España &nbsp;·&nbsp; 📞 665 02 90 03 &nbsp;·&nbsp; ✉ <a href="mailto:albertescrichs@gmail.com">albertescrichs@gmail.com</a> &nbsp;·&nbsp; <a href="https://es.linkedin.com/in/albertescrichs">LinkedIn ↗</a></span>
+      <div class="hero-contact-bar">
+        <a href="tel:665029003">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M22 16.92v3a2 2 0 0 1-2.18 2A19.79 19.79 0 0 1 3.09 4.18 2 2 0 0 1 5.07 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L9.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          665 02 90 03
+        </a>
+        <a href="mailto:albertescrichs@gmail.com">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          albertescrichs@gmail.com
+        </a>
+        <a href="https://es.linkedin.com/in/albertescrichs" target="_blank">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+          LinkedIn ↗
+        </a>
       </div>
     </div>
-    <div class="header-right">
-      <div class="logo-e">Ǝ</div>
-      <div class="logo-name">ESCRICHS</div>
-    </div>
-  </div>
 
-  <!-- PERFIL -->
-  <div class="label">Perfil Profesional</div>
-  <div class="perfil">
-    <p>Profesional creativo y estratégico con <strong>+15 años de experiencia</strong> en marketing digital, gestión de proyectos y diseño UX/UI. Historial demostrado liderando equipos multidisciplinares y proyectos end-to-end para empresas como <strong>Experian</strong> y <strong>Giunti Psychometrics</strong>. Orientado a resultados, con sólida capacidad analítica y comunicación directa con cliente.</p>
-  </div>
-
-  <!-- ESPECIALIZACIÓN -->
-  <div class="label">Áreas de Especialización</div>
-  <div class="spec-grid">
-    <div class="spec-card">
-      <div class="spec-num">01</div>
-      <div class="spec-card-title">Digital Project Manager</div>
-      <div class="spec-card-desc">+10 años liderando proyectos de marketing digital end-to-end: estrategia, ejecución y entrega de resultados.</div>
-      <div class="spec-tools">
-        <span class="tag">Estrategia 360°</span>
-        <span class="tag">Funnels</span>
-        <span class="tag">Timings</span>
-        <span class="tag">Presupuestos</span>
-        <span class="tag">Data-driven</span>
+    <!-- FOTO -->
+    <div class="hero-right">
+      <div class="hero-photo-placeholder">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        <span>Foto de perfil</span>
       </div>
-    </div>
-    <div class="spec-card">
-      <div class="spec-num">02</div>
-      <div class="spec-card-title">Senior Marketing Specialist</div>
-      <div class="spec-card-desc">Estrategia de marca global, campañas integradas y gestión de eventos corporativos en mercados internacionales.</div>
-      <div class="spec-tools">
-        <span class="tag">Branding Global</span>
-        <span class="tag">Campañas</span>
-        <span class="tag">Eventos</span>
-        <span class="tag">PR & Medios</span>
-      </div>
-    </div>
-    <div class="spec-card">
-      <div class="spec-num">03</div>
-      <div class="spec-card-title">UX / UI Designer</div>
-      <div class="spec-card-desc">Diseño de productos digitales centrados en el usuario: interfaces, flujos y prototipos para web y app.</div>
-      <div class="spec-tools">
-        <span class="tag">Figma</span>
-        <span class="tag">Adobe XD</span>
-        <span class="tag">HTML5/CSS3</span>
-        <span class="tag">Zepplin</span>
+      <div class="hero-badge">
+        <strong>15+</strong>
+        Años de experiencia
       </div>
     </div>
   </div>
 
-  <!-- SKILLS -->
-  <div class="label">Conocimientos Técnicos</div>
-  <div class="skills-grid">
-    <div class="skill-card">
-      <div class="skill-title">Diseño &amp; Creatividad</div>
-      <div class="skill-desc">Adobe Creative Suite / CC, Acrobat PRO. Motion Graphics, Ilustración, Animación 2D/3D.</div>
+  <!-- ══ STATS ══ -->
+  <div class="stats-bar">
+    <div class="stat-item">
+      <div class="stat-num">15<span>+</span></div>
+      <div class="stat-label">Años de experiencia</div>
     </div>
-    <div class="skill-card">
-      <div class="skill-title">Gestión de Proyectos</div>
-      <div class="skill-desc"><span class="skill-link">Confluence, Jira, Slack &amp; Monday.</span> Planificación, control y reporting.</div>
+    <div class="stat-item">
+      <div class="stat-num">6<span>+</span></div>
+      <div class="stat-label">Empresas &amp; proyectos clave</div>
     </div>
-    <div class="skill-card">
-      <div class="skill-title">Marketing Automation</div>
-      <div class="skill-desc">Diseño y maquetación en Marketing Digital. <span class="skill-link">Oracle Eloqua.</span></div>
+    <div class="stat-item">
+      <div class="stat-num">3<span>×</span></div>
+      <div class="stat-label">Perfiles de especialización</div>
     </div>
-    <div class="skill-card">
-      <div class="skill-title">Desarrollo Front-end</div>
-      <div class="skill-desc"><span class="skill-link">HTML5, CSS3, Bootstrap, jQuery.</span> Maquetación landing pages y Web APP.</div>
-    </div>
-    <div class="skill-card">
-      <div class="skill-title">Análisis &amp; Datos</div>
-      <div class="skill-desc"><span class="skill-link">Google Analytics, Google Studio, Hotjar.</span> Investigación y testing.</div>
-    </div>
-    <div class="skill-card">
-      <div class="skill-title">Gestión de Contenidos</div>
-      <div class="skill-desc"><span class="skill-link">Adobe Experience Manager &amp; WordPress (PHP).</span></div>
+    <div class="stat-item">
+      <div class="stat-num">2<span>★</span></div>
+      <div class="stat-label">Idiomas nativos</div>
     </div>
   </div>
 
-</div>
-
-<!-- ══════════════ PAGE 2 ══════════════ -->
-<div class="page">
-
-  <div class="p2-header">
-    <div>
-      <div class="p2-name">ALBERT ESCRICHS</div>
-      <div class="p2-sub">Digital Project Manager · Senior Marketing Specialist · UX/UI Designer</div>
+  <!-- ══ ESPECIALIZACIÓN ══ -->
+  <div class="section">
+    <div class="section-header">
+      <div>
+        <div class="section-label">Áreas de Especialización</div>
+        <h2 class="section-title">Tres perfiles,<br>un profesional.</h2>
+      </div>
     </div>
-    <div style="text-align:right;">
-      <div class="logo-e">Ǝ</div>
-      <div class="logo-name">ESCRICHS</div>
+    <div class="spec-grid">
+
+      <div class="spec-card">
+        <div class="spec-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 17H7A5 5 0 0 1 7 7h2M15 7h2a5 5 0 0 1 0 10h-2M11 12h2"/></svg>
+        </div>
+        <div class="spec-num-label">01 — Project</div>
+        <h3 class="spec-title">Digital Project Manager</h3>
+        <p class="spec-desc">+10 años liderando proyectos de marketing digital end-to-end: estrategia, ejecución y entrega de resultados medibles.</p>
+        <div class="spec-tags">
+          <span class="tag">Estrategia 360°</span>
+          <span class="tag">Funnels</span>
+          <span class="tag">Timings</span>
+          <span class="tag">Presupuestos</span>
+          <span class="tag">Data-driven</span>
+        </div>
+      </div>
+
+      <div class="spec-card">
+        <div class="spec-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 20h9M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+        </div>
+        <div class="spec-num-label">02 — Marketing</div>
+        <h3 class="spec-title">Senior Marketing Specialist</h3>
+        <p class="spec-desc">Estrategia de marca global, campañas integradas y gestión de eventos corporativos en mercados internacionales.</p>
+        <div class="spec-tags">
+          <span class="tag">Branding Global</span>
+          <span class="tag">Campañas</span>
+          <span class="tag">Eventos</span>
+          <span class="tag">PR &amp; Medios</span>
+        </div>
+      </div>
+
+      <div class="spec-card">
+        <div class="spec-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M3 9h18M9 21V9"/></svg>
+        </div>
+        <div class="spec-num-label">03 — Design</div>
+        <h3 class="spec-title">UX / UI Designer</h3>
+        <p class="spec-desc">Diseño de productos digitales centrados en el usuario: interfaces, flujos y prototipos para web, app y escritorio.</p>
+        <div class="spec-tags">
+          <span class="tag">Figma</span>
+          <span class="tag">Adobe XD</span>
+          <span class="tag">HTML5/CSS3</span>
+          <span class="tag">Zepplin</span>
+        </div>
+      </div>
+
     </div>
   </div>
 
-  <!-- EXPERIENCIA -->
-  <div class="label">Experiencia Profesional</div>
-  <table class="exp-table">
-    <thead>
-      <tr>
-        <th style="width:28%">Empresa</th>
-        <th style="width:44%">Rol &amp; Funciones</th>
-        <th>Período</th>
-      </tr>
-    </thead>
-    <tbody>
-
-      <tr>
-        <td>
-          <div class="exp-co">GIUNTI PSYCHOMETRICS</div>
-          <div class="exp-loc">Granada</div>
-        </td>
-        <td>
-          <div class="exp-role-text">Corporate Marketing Senior Specialist</div>
-          <div class="exp-desc-text">Estrategia global de branding e identidad visual. Campañas corporativas integradas. Coordinación de eventos (ferias, conferencias, lanzamientos). Liderazgo creativo de contenido multimedia. Enlace entre equipos regionales. Gestión de PR y relaciones con medios.</div>
-        </td>
-        <td><span class="exp-date-text">Nov 2024 — Act.</span></td>
-      </tr>
-
-      <tr>
-        <td>
-          <div class="exp-co">EXPERIAN</div>
-          <div class="exp-loc">Granada</div>
-        </td>
-        <td>
-          <div class="exp-role-text">Senior Marketing Specialist &amp; Graphic Designer</div>
-          <div class="exp-desc-text">Lanzamientos de productos y campañas integradas. Investigación, encuestas y análisis de datos. Gestión de contenidos web. Planificación y producción de eventos.</div>
-        </td>
-        <td><span class="exp-date-text">2021 — Oct 2024</span></td>
-      </tr>
-
-      <tr>
-        <td>
-          <div class="exp-co">AXESOR</div>
-          <div class="exp-loc">Granada</div>
-        </td>
-        <td>
-          <div class="exp-role-text">Senior Graphic Designer &amp; UX/UI</div>
-          <div class="exp-desc-text">Responsable de Branding y desarrollo de proyectos web. Diseño UX/UI de productos para las distintas líneas de negocio.</div>
-        </td>
-        <td><span class="exp-date-text">2014 — 2021</span></td>
-      </tr>
-
-      <tr>
-        <td>
-          <div class="exp-co">SAANTS DI</div>
-          <div class="exp-loc">Barcelona</div>
-        </td>
-        <td>
-          <div class="exp-role-text">Supervisor Marketing / Arte</div>
-          <div class="exp-desc-text">Dirección de arte, estrategia on-off, publicidad, diseño web y redes sociales. Proyectos web, editorial y branding.</div>
-        </td>
-        <td><span class="exp-date-text">2010 — 2014</span></td>
-      </tr>
-
-      <tr>
-        <td>
-          <div class="exp-co">FREELANCE</div>
-          <div class="exp-loc">Barcelona</div>
-        </td>
-        <td>
-          <div class="exp-role-text">Diseñador &amp; Consultor Digital</div>
-          <div class="exp-desc-text">Branding, proyectos web, material promocional, eventos y Community Manager.</div>
-        </td>
-        <td><span class="exp-date-text">2010 — Act.</span></td>
-      </tr>
-
-      <tr>
-        <td>
-          <div class="exp-co">EAG / ADYTA / NTS</div>
-          <div class="exp-loc">Granada · Netherlands</div>
-        </td>
-        <td>
-          <div class="exp-role-text">Profesor · Diseñador Gráfico</div>
-          <div class="exp-desc-text">Formación en proyectos online (EAG). Diseño web y branding (Adyta, NTS Koala Global).</div>
-        </td>
-        <td><span class="exp-date-text">2006 — 2014</span></td>
-      </tr>
-
-    </tbody>
-  </table>
-
-  <div class="divider"></div>
-
-  <!-- BOTTOM -->
-  <div class="p2-bottom">
-
-    <!-- EDU -->
-    <div>
-      <div class="label">Educación &amp; Formación</div>
-      <div class="edu-item">
-        <div class="edu-degree">ThePowerDigitalMarketing · Marketing Expert</div>
-        <div class="edu-school">ThePowerMBA &nbsp;<span class="edu-date">2020 / 2022</span></div>
-      </div>
-      <div class="edu-item">
-        <div class="edu-degree">Máster Animación Avanzada 3D · Kandor Graphics</div>
-        <div class="edu-school">UGR Granada &nbsp;<span class="edu-date">2012</span></div>
-      </div>
-      <div class="edu-item">
-        <div class="edu-degree">Diplomatura Diseño Gráfico</div>
-        <div class="edu-school">EAG Escuela Arte Granada &nbsp;<span class="edu-date">2010</span></div>
-      </div>
-      <div class="edu-item">
-        <div class="edu-degree">Diseño Arte Final</div>
-        <div class="edu-school">Escola Llotja, Barcelona &nbsp;<span class="edu-date">2006 / 07</span></div>
+  <!-- ══ EXPERIENCIA ══ -->
+  <div class="section">
+    <div class="section-header">
+      <div>
+        <div class="section-label">Trayectoria</div>
+        <h2 class="section-title">Experiencia Profesional</h2>
       </div>
     </div>
+    <div class="exp-list">
 
-    <!-- IDIOMAS + COMPETENCIAS -->
-    <div>
-      <div class="label">Idiomas</div>
-      <div class="lang-item">
-        <div class="lang-name">Castellano</div>
-        <div class="lang-level">Nativo · Bilingüe</div>
+      <div class="exp-row">
+        <div class="exp-co-block">
+          <h3 class="exp-co">Giunti Psychometrics</h3>
+          <div class="exp-loc">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            Granada
+          </div>
+        </div>
+        <div class="exp-content">
+          <h4 class="exp-role">Corporate Marketing Senior Specialist</h4>
+          <p class="exp-desc">Estrategia global de branding e identidad visual. Campañas corporativas integradas. Coordinación de eventos (ferias, conferencias, lanzamientos). Liderazgo creativo de contenido multimedia. Enlace entre equipos regionales. Gestión de PR y relaciones con medios.</p>
+        </div>
+        <div><span class="exp-date-badge exp-current">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          Nov 2024 — Act.
+        </span></div>
       </div>
-      <div class="lang-item">
-        <div class="lang-name">Catalán</div>
-        <div class="lang-level">Nativo · Bilingüe</div>
+
+      <div class="exp-row">
+        <div class="exp-co-block">
+          <h3 class="exp-co">Experian</h3>
+          <div class="exp-loc">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            Granada
+          </div>
+        </div>
+        <div class="exp-content">
+          <h4 class="exp-role">Senior Marketing Specialist &amp; Graphic Designer</h4>
+          <p class="exp-desc">Lanzamientos de productos y campañas integradas. Investigación y análisis de datos. Gestión de contenidos web. Planificación y producción de eventos.</p>
+        </div>
+        <div><span class="exp-date-badge">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          2021 — Oct 2024
+        </span></div>
       </div>
-      <div class="lang-item">
-        <div class="lang-name">Inglés</div>
-        <div class="lang-level">Nivel Conversación</div>
+
+      <div class="exp-row">
+        <div class="exp-co-block">
+          <h3 class="exp-co">Axesor</h3>
+          <div class="exp-loc">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            Granada
+          </div>
+        </div>
+        <div class="exp-content">
+          <h4 class="exp-role">Senior Graphic Designer &amp; UX/UI</h4>
+          <p class="exp-desc">Responsable de Branding y desarrollo de proyectos web. Diseño UX/UI de productos para las distintas líneas de negocio.</p>
+        </div>
+        <div><span class="exp-date-badge">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          2014 — 2021
+        </span></div>
       </div>
-      <br>
-      <div class="label">Competencias</div>
-      <div class="comp-wrap">
-        <span class="tag">Liderazgo</span>
-        <span class="tag">Trabajo en equipo</span>
-        <span class="tag">Comunicación</span>
-        <span class="tag">Creatividad</span>
-        <span class="tag">Proactividad</span>
-        <span class="tag">Orientación a resultados</span>
+
+      <div class="exp-row">
+        <div class="exp-co-block">
+          <h3 class="exp-co">Saants DI</h3>
+          <div class="exp-loc">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            Barcelona
+          </div>
+        </div>
+        <div class="exp-content">
+          <h4 class="exp-role">Supervisor Marketing / Arte</h4>
+          <p class="exp-desc">Dirección de arte, estrategia on-off, publicidad, diseño web y redes sociales. Proyectos web, editorial y branding.</p>
+        </div>
+        <div><span class="exp-date-badge">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          2010 — 2014
+        </span></div>
+      </div>
+
+      <div class="exp-row">
+        <div class="exp-co-block">
+          <h3 class="exp-co">Freelance</h3>
+          <div class="exp-loc">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            Barcelona · Remote
+          </div>
+        </div>
+        <div class="exp-content">
+          <h4 class="exp-role">Diseñador &amp; Consultor Digital</h4>
+          <p class="exp-desc">Branding, proyectos web, material promocional, eventos y Community Manager.</p>
+        </div>
+        <div><span class="exp-date-badge exp-current">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          2010 — Act.
+        </span></div>
+      </div>
+
+      <div class="exp-row">
+        <div class="exp-co-block">
+          <h3 class="exp-co">EAG / Adyta / NTS</h3>
+          <div class="exp-loc">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            Granada · Netherlands
+          </div>
+        </div>
+        <div class="exp-content">
+          <h4 class="exp-role">Profesor · Diseñador Gráfico</h4>
+          <p class="exp-desc">Formación en proyectos online (EAG). Diseño web y branding (Adyta, NTS Koala Global).</p>
+        </div>
+        <div><span class="exp-date-badge">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          2006 — 2014
+        </span></div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ══ SKILLS ══ -->
+  <div class="section">
+    <div class="section-header">
+      <div>
+        <div class="section-label">Stack Tecnológico</div>
+        <h2 class="section-title">Conocimientos Técnicos</h2>
       </div>
     </div>
+    <div class="skills-grid">
+      <div class="skill-card">
+        <div class="skill-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2M9 9h.01M15 9h.01"/></svg>
+        </div>
+        <div>
+          <h4 class="skill-title">Diseño &amp; Creatividad</h4>
+          <p class="skill-desc">Adobe CC, Acrobat PRO. Motion Graphics, Ilustración, Animación 2D/3D.</p>
+        </div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+        </div>
+        <div>
+          <h4 class="skill-title">UX/UI &amp; Prototipado</h4>
+          <p class="skill-desc">Figma, Adobe XD, Zepplin. Flujos de interacción y diseño de producto.</p>
+        </div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+        </div>
+        <div>
+          <h4 class="skill-title">Desarrollo Front-end</h4>
+          <p class="skill-desc">HTML5, CSS3, Bootstrap, jQuery. Landing pages y Web APP.</p>
+        </div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 3l7.07 16.97 2.51-7.39 7.39-2.51L3 3z"/></svg>
+        </div>
+        <div>
+          <h4 class="skill-title">Marketing Automation</h4>
+          <p class="skill-desc">Oracle Eloqua. Diseño y maquetación en Marketing Digital.</p>
+        </div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+        </div>
+        <div>
+          <h4 class="skill-title">Análisis &amp; Datos</h4>
+          <p class="skill-desc">Google Analytics, Google Studio, Hotjar. Investigación y testing.</p>
+        </div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+        </div>
+        <div>
+          <h4 class="skill-title">Gestión de Proyectos</h4>
+          <p class="skill-desc">Confluence, Jira, Slack, Monday. Planificación y control.</p>
+        </div>
+      </div>
+    </div>
+  </div>
 
-    <!-- DATOS -->
-    <div>
-      <div class="label">Contacto</div>
-      <div class="data-row">
-        <div class="data-label">Ubicación</div>
-        <div class="data-val">C/ Neptuno nº6 · 18004, Granada</div>
+  <!-- ══ EDUCACIÓN + IDIOMAS + COMPETENCIAS ══ -->
+  <div class="section">
+    <div class="section-header">
+      <div>
+        <div class="section-label">Formación &amp; Perfil</div>
+        <h2 class="section-title">Educación, Idiomas<br>&amp; Competencias</h2>
       </div>
-      <div class="data-row">
-        <div class="data-label">Teléfono</div>
-        <div class="data-val">665 02 90 03</div>
+    </div>
+    <div class="bottom-grid">
+
+      <div>
+        <h3 class="sub-title">Formación Académica</h3>
+        <div class="edu-item">
+          <h4 class="edu-degree">ThePowerDigitalMarketing · Marketing Expert</h4>
+          <div class="edu-school">ThePowerMBA &nbsp;<span class="edu-date">2020 / 2022</span></div>
+        </div>
+        <div class="edu-item">
+          <h4 class="edu-degree">Máster Animación Avanzada 3D · Kandor Graphics</h4>
+          <div class="edu-school">UGR Universidad de Granada &nbsp;<span class="edu-date">2012</span></div>
+        </div>
+        <div class="edu-item">
+          <h4 class="edu-degree">Diplomatura Diseño Gráfico</h4>
+          <div class="edu-school">EAG Escuela Arte Granada &nbsp;<span class="edu-date">2010</span></div>
+        </div>
+        <div class="edu-item">
+          <h4 class="edu-degree">Diseño Arte Final</h4>
+          <div class="edu-school">Escola Llotja, Barcelona &nbsp;<span class="edu-date">2006 / 07</span></div>
+        </div>
       </div>
-      <div class="data-row">
-        <div class="data-label">Email</div>
-        <div class="data-val"><a href="mailto:albertescrichs@gmail.com">albertescrichs@gmail.com</a></div>
+
+      <div>
+        <h3 class="sub-title">Idiomas</h3>
+        <div class="lang-item">
+          <span class="lang-name">Castellano</span>
+          <span class="lang-level">Nativo · Bilingüe</span>
+        </div>
+        <div class="lang-item">
+          <span class="lang-name">Catalán</span>
+          <span class="lang-level">Nativo · Bilingüe</span>
+        </div>
+        <div class="lang-item">
+          <span class="lang-name">Inglés</span>
+          <span class="lang-level">Conversación</span>
+        </div>
+
+        <br>
+        <h3 class="sub-title">Otros</h3>
+        <div class="lang-item">
+          <span class="lang-name" style="font-size:11px;font-weight:500;color:var(--mid);">Permiso de conducir B</span>
+          <span class="lang-level">Vehículo propio</span>
+        </div>
       </div>
-      <div class="data-row">
-        <div class="data-label">LinkedIn</div>
-        <div class="data-val"><a href="https://es.linkedin.com/in/albertescrichs">es.linkedin.com/in/albertescrichs</a></div>
+
+      <div>
+        <h3 class="sub-title">Competencias</h3>
+        <div class="comp-wrap">
+          <span class="pill" style="font-size:10px;padding:5px 12px;">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            Liderazgo
+          </span>
+          <span class="pill" style="font-size:10px;padding:5px 12px;">Trabajo en equipo</span>
+          <span class="pill" style="font-size:10px;padding:5px 12px;">Comunicación</span>
+          <span class="pill" style="font-size:10px;padding:5px 12px;">Creatividad</span>
+          <span class="pill" style="font-size:10px;padding:5px 12px;">Proactividad</span>
+          <span class="pill" style="font-size:10px;padding:5px 12px;">Orientación a resultados</span>
+        </div>
       </div>
-      <div class="data-row">
-        <div class="data-label">Otros</div>
-        <div class="data-val" style="color:var(--gray2);">Permiso B · Vehículo propio</div>
+
+    </div>
+  </div>
+
+  <!-- ══ CONTACT ══ -->
+  <div class="contact-section">
+    <div class="contact-label">Contacto</div>
+    <div class="contact-headline">Trabajemos<br><em>juntos.</em></div>
+
+    <div class="contact-grid">
+      <div class="contact-items">
+
+        <div class="contact-item">
+          <div class="contact-item-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M22 16.92v3a2 2 0 0 1-2.18 2A19.79 19.79 0 0 1 3.09 4.18 2 2 0 0 1 5.07 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L9.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          </div>
+          <div>
+            <div class="contact-item-label">Teléfono</div>
+            <div class="contact-item-val"><a href="tel:665029003">665 02 90 03</a></div>
+          </div>
+        </div>
+
+        <div class="contact-item">
+          <div class="contact-item-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          </div>
+          <div>
+            <div class="contact-item-label">Email</div>
+            <div class="contact-item-val"><a href="mailto:albertescrichs@gmail.com">albertescrichs@gmail.com</a></div>
+          </div>
+        </div>
+
+        <div class="contact-item">
+          <div class="contact-item-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+          </div>
+          <div>
+            <div class="contact-item-label">LinkedIn</div>
+            <div class="contact-item-val"><a href="https://es.linkedin.com/in/albertescrichs" target="_blank">es.linkedin.com/in/albertescrichs ↗</a></div>
+          </div>
+        </div>
+
+        <div class="contact-item">
+          <div class="contact-item-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          </div>
+          <div>
+            <div class="contact-item-label">Ubicación</div>
+            <div class="contact-item-val">C/ Neptuno nº6 · 18004, Granada</div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="contact-right">
+        <div class="contact-logo-e">Ǝ</div>
+        <div class="contact-logo-name">ESCRICHS</div>
+        <div class="contact-copy">© 2025 · Albert Escrichs · Todos los derechos reservados</div>
       </div>
     </div>
 
   </div>
 
-</div>
+</div><!-- /page -->
 
 </body>
 </html>
