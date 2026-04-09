@@ -67,7 +67,7 @@
   }
 
   /* ══════════════════════════════
-     HERO
+      HERO
   ══════════════════════════════ */
   .hero {
     display: grid;
@@ -158,19 +158,13 @@
     background: var(--border);
     overflow: hidden;
   }
-  .hero-photo-placeholder {
-    width: 100%; height: 100%;
-    background: linear-gradient(160deg, #f0f0f0 0%, #e0e0e0 100%);
-    display: flex; flex-direction: column;
-    align-items: center; justify-content: center;
-    gap: 8px; color: var(--gray); font-size: 11px;
-  }
-  .hero-photo-placeholder svg { width: 36px; height: 36px; opacity: .4; }
 
-  .hero-right img {
+  /* Nuevos estilos para encajar la imagen de perfil */
+  .hero-profile-image {
     width: 100%;
     height: 100%;
-    object-fit: cover; /* Esto hace que la foto cubra el área sin deformarse */
+    object-fit: cover;
+    object-position: top center; /* Ajuste para un retrato */
     display: block;
   }
 
@@ -189,7 +183,7 @@
   .hero-badge strong { display: block; font-size: 20px; font-weight: 900; color: var(--pink); line-height: 1; }
 
   /* ══════════════════════════════
-     STATS BAR
+      STATS BAR
   ══════════════════════════════ */
   .stats-bar {
     display: grid; grid-template-columns: repeat(4, 1fr);
@@ -209,7 +203,7 @@
   .stat-label { font-size: 11px; color: var(--gray); margin-top: 4px; font-weight: 500; }
 
   /* ══════════════════════════════
-     SECTIONS
+      SECTIONS
   ══════════════════════════════ */
   .section { padding: 52px 52px; border-bottom: 1px solid var(--border); }
   .section:last-child { border-bottom: none; }
@@ -236,7 +230,7 @@
   }
 
   /* ══════════════════════════════
-     ESPECIALIZACIÓN
+      ESPECIALIZACIÓN
   ══════════════════════════════ */
   .spec-grid {
     display: grid; grid-template-columns: repeat(3, 1fr);
@@ -290,7 +284,7 @@
   }
 
   /* ══════════════════════════════
-     EXPERIENCIA
+      EXPERIENCIA
   ══════════════════════════════ */
   .exp-list { display: flex; flex-direction: column; gap: 0; }
 
@@ -336,7 +330,7 @@
   .exp-current svg { color: var(--pink); }
 
   /* ══════════════════════════════
-     SKILLS GRID
+      SKILLS GRID
   ══════════════════════════════ */
   .skills-grid {
     display: grid; grid-template-columns: repeat(3, 1fr);
@@ -363,7 +357,7 @@
   .skill-desc { font-size: 10px; color: var(--gray); line-height: 1.6; }
 
   /* ══════════════════════════════
-     BOTTOM GRID
+      BOTTOM GRID
   ══════════════════════════════ */
   .bottom-grid {
     display: grid;
@@ -393,7 +387,7 @@
   .comp-wrap { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 4px; }
 
   /* ══════════════════════════════
-     CONTACT SECTION
+      CONTACT SECTION
   ══════════════════════════════ */
   .contact-section {
     background: var(--dark);
@@ -459,7 +453,6 @@
 </head>
 <body>
 
-<!-- NAV BAR -->
 <div class="no-print">
   <div class="np-logo">Ǝ ESCRICHS</div>
   <div style="display:flex;gap:24px;align-items:center;font-size:11px;color:#888;">
@@ -474,7 +467,6 @@
 
 <div class="page">
 
-  <!-- ══ HERO ══ -->
   <div class="hero">
     <div class="hero-left">
       <div>
@@ -517,16 +509,15 @@
       </div>
     </div>
 
-    <!-- FOTO -->
     <div class="hero-right">
-      <img src="images/Albert_Escrichs.webp" alt="Albert Escrichs">
+      <img src="images/Albert_Escrichs.webp" alt="Albert Escrichs" class="hero-profile-image">
       <div class="hero-badge">
         <strong>15+</strong>
         Años de experiencia
       </div>
     </div>
+  </div>
 
-  <!-- ══ STATS ══ -->
   <div class="stats-bar">
     <div class="stat-item">
       <div class="stat-num">15<span>+</span></div>
@@ -546,7 +537,6 @@
     </div>
   </div>
 
-  <!-- ══ ESPECIALIZACIÓN ══ -->
   <div class="section">
     <div class="section-header">
       <div>
@@ -605,7 +595,6 @@
     </div>
   </div>
 
-  <!-- ══ EXPERIENCIA ══ -->
   <div class="section">
     <div class="section-header">
       <div>
@@ -726,7 +715,6 @@
     </div>
   </div>
 
-  <!-- ══ SKILLS ══ -->
   <div class="section">
     <div class="section-header">
       <div>
@@ -792,7 +780,6 @@
     </div>
   </div>
 
-  <!-- ══ EDUCACIÓN + IDIOMAS + COMPETENCIAS ══ -->
   <div class="section">
     <div class="section-header">
       <div>
@@ -863,7 +850,6 @@
     </div>
   </div>
 
-  <!-- ══ CONTACT ══ -->
   <div class="contact-section">
     <div class="contact-label">Contacto</div>
     <div class="contact-headline">Trabajemos<br><em>juntos.</em></div>
@@ -922,7 +908,5 @@
 
   </div>
 
-</div><!-- /page -->
-
-</body>
+</div></body>
 </html>
