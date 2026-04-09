@@ -38,6 +38,7 @@
     .hero { min-height: auto !important; }
   }
 
+  /* ── NAV BAR ── */
   .no-print {
     position: sticky; top: 0; z-index: 200;
     background: rgba(255,255,255,0.92);
@@ -45,13 +46,16 @@
     border-bottom: 1px solid var(--border);
     padding: 12px 48px;
     display: flex; align-items: center; justify-content: space-between;
+    gap: 16px;
   }
-  .no-print .np-logo { font-size: 13px; font-weight: 800; letter-spacing: -.3px; color: var(--dark); }
+  .no-print .np-logo { font-size: 13px; font-weight: 800; letter-spacing: -.3px; color: var(--dark); white-space: nowrap; }
+  .no-print .np-roles { display: flex; gap: 24px; align-items: center; font-size: 11px; color: #888; }
+  .no-print .np-roles .sep { color: #e0e0e0; }
   .no-print button {
     background: var(--pink); color: #fff; border: none;
     padding: 8px 22px; font-family: inherit; font-weight: 700;
     font-size: 11px; cursor: pointer; border-radius: 100px;
-    letter-spacing: .3px; transition: opacity .2s;
+    letter-spacing: .3px; transition: opacity .2s; white-space: nowrap;
   }
   .no-print button:hover { opacity: .82; }
 
@@ -90,95 +94,57 @@
     text-transform: uppercase; color: var(--pink);
     margin-bottom: 20px;
   }
-  .hero-eyebrow span {
-    display: inline-block; width: 28px; height: 1.5px; background: var(--pink);
-  }
+  .hero-eyebrow span { display: inline-block; width: 28px; height: 1.5px; background: var(--pink); }
 
   .hero-name {
     font-size: clamp(44px, 6vw, 72px);
-    font-weight: 900;
-    line-height: .95;
-    letter-spacing: -3px;
-    color: var(--dark);
-    margin-bottom: 4px;
+    font-weight: 900; line-height: .95;
+    letter-spacing: -3px; color: var(--dark); margin-bottom: 4px;
   }
+  .hero-name em { font-style: normal; color: var(--pink); }
 
-  .hero-name em {
-    font-style: normal;
-    color: var(--pink);
-  }
-
-  .hero-roles {
-    margin-top: 22px;
-    display: flex; flex-wrap: wrap; gap: 8px;
-  }
+  .hero-roles { margin-top: 22px; display: flex; flex-wrap: wrap; gap: 8px; }
 
   .pill {
     display: inline-flex; align-items: center; gap: 6px;
-    border: 1.5px solid var(--border);
-    border-radius: 100px;
+    border: 1.5px solid var(--border); border-radius: 100px;
     padding: 5px 14px 5px 10px;
     font-size: 11px; font-weight: 600; color: var(--mid);
-    background: var(--white);
-    transition: border-color .2s, color .2s;
+    background: var(--white); transition: border-color .2s, color .2s;
   }
   .pill:hover { border-color: var(--pink); color: var(--pink); }
   .pill svg { width: 14px; height: 14px; flex-shrink: 0; }
-  .pill-pink {
-    border-color: var(--pink);
-    color: var(--pink);
-    background: var(--pink-light);
-  }
+  .pill-pink { border-color: var(--pink); color: var(--pink); background: var(--pink-light); }
 
   .hero-summary {
-    margin-top: 28px;
-    font-size: 13px; color: var(--mid); line-height: 1.8;
-    max-width: 480px;
-    border-left: 2px solid var(--pink);
-    padding-left: 16px;
+    margin-top: 28px; font-size: 13px; color: var(--mid); line-height: 1.8;
+    max-width: 480px; border-left: 2px solid var(--pink); padding-left: 16px;
   }
   .hero-summary strong { color: var(--dark); }
 
   .hero-contact-bar {
-    margin-top: 32px;
-    display: flex; flex-wrap: wrap; gap: 16px;
-    font-size: 11px; color: var(--gray);
-    align-items: center;
+    margin-top: 32px; display: flex; flex-wrap: wrap; gap: 16px;
+    font-size: 11px; color: var(--gray); align-items: center;
   }
   .hero-contact-bar a {
     color: var(--mid); text-decoration: none; font-weight: 500;
-    display: flex; align-items: center; gap: 5px;
-    transition: color .2s;
+    display: flex; align-items: center; gap: 5px; transition: color .2s;
   }
   .hero-contact-bar a:hover { color: var(--pink); }
   .hero-contact-bar svg { width: 13px; height: 13px; }
 
-  .hero-right {
-    position: relative;
-    background: var(--border);
-    overflow: hidden;
-  }
-
-  /* Nuevos estilos para encajar la imagen de perfil */
+  .hero-right { position: relative; background: var(--border); overflow: hidden; }
   .hero-profile-image {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: top center; /* Ajuste para un retrato */
-    display: block;
+    width: 100%; height: 100%; object-fit: cover;
+    object-position: top center; display: block;
   }
 
-  /* Badge flotante */
   .hero-badge {
-    position: absolute;
-    bottom: 24px; left: -20px;
-    background: var(--white);
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    padding: 12px 18px;
+    position: absolute; bottom: 24px; left: -20px;
+    background: var(--white); border: 1px solid var(--border);
+    border-radius: 10px; padding: 12px 18px;
     box-shadow: 0 4px 24px rgba(0,0,0,.10);
-    font-size: 11px; color: var(--mid);
-    z-index: 10;
+    font-size: 11px; color: var(--mid); z-index: 10;
   }
   .hero-badge strong { display: block; font-size: 20px; font-weight: 900; color: var(--pink); line-height: 1; }
 
@@ -187,18 +153,11 @@
   ══════════════════════════════ */
   .stats-bar {
     display: grid; grid-template-columns: repeat(4, 1fr);
-    border-top: 1px solid var(--border);
-    border-bottom: 1px solid var(--border);
+    border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
   }
-  .stat-item {
-    padding: 24px 32px;
-    border-right: 1px solid var(--border);
-  }
+  .stat-item { padding: 24px 32px; border-right: 1px solid var(--border); }
   .stat-item:last-child { border-right: none; }
-  .stat-num {
-    font-size: 36px; font-weight: 900; color: var(--dark);
-    letter-spacing: -2px; line-height: 1;
-  }
+  .stat-num { font-size: 36px; font-weight: 900; color: var(--dark); letter-spacing: -2px; line-height: 1; }
   .stat-num span { color: var(--pink); }
   .stat-label { font-size: 11px; color: var(--gray); margin-top: 4px; font-weight: 500; }
 
@@ -210,120 +169,62 @@
 
   .section-header {
     display: flex; align-items: baseline;
-    justify-content: space-between;
-    margin-bottom: 32px;
+    justify-content: space-between; margin-bottom: 32px;
   }
-
   .section-label {
     font-size: 10px; font-weight: 700; letter-spacing: 2px;
     text-transform: uppercase; color: var(--pink);
     display: flex; align-items: center; gap: 8px;
   }
-  .section-label::before {
-    content: ''; display: inline-block;
-    width: 20px; height: 1.5px; background: var(--pink);
-  }
-
-  h2.section-title {
-    font-size: 28px; font-weight: 900; letter-spacing: -1px;
-    color: var(--dark); line-height: 1.1;
-  }
+  .section-label::before { content: ''; display: inline-block; width: 20px; height: 1.5px; background: var(--pink); }
+  h2.section-title { font-size: 28px; font-weight: 900; letter-spacing: -1px; color: var(--dark); line-height: 1.1; }
 
   /* ══════════════════════════════
       ESPECIALIZACIÓN
   ══════════════════════════════ */
-  .spec-grid {
-    display: grid; grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
-  }
+  .spec-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
   .spec-card {
-    border: 1.5px solid var(--border);
-    border-radius: 12px;
-    padding: 24px 22px;
-    transition: border-color .2s, box-shadow .2s;
+    border: 1.5px solid var(--border); border-radius: 12px;
+    padding: 24px 22px; transition: border-color .2s, box-shadow .2s;
     position: relative; overflow: hidden;
   }
-  .spec-card:hover {
-    border-color: var(--pink);
-    box-shadow: 0 4px 24px rgba(224,0,127,.08);
-  }
+  .spec-card:hover { border-color: var(--pink); box-shadow: 0 4px 24px rgba(224,0,127,.08); }
   .spec-card::after {
-    content: '';
-    position: absolute; bottom: 0; left: 0; right: 0;
+    content: ''; position: absolute; bottom: 0; left: 0; right: 0;
     height: 3px; background: var(--pink);
-    transform: scaleX(0); transform-origin: left;
-    transition: transform .3s;
+    transform: scaleX(0); transform-origin: left; transition: transform .3s;
   }
   .spec-card:hover::after { transform: scaleX(1); }
-
   .spec-icon {
-    width: 40px; height: 40px;
-    background: var(--pink-light);
-    border-radius: 10px;
-    display: flex; align-items: center; justify-content: center;
-    margin-bottom: 14px;
+    width: 40px; height: 40px; background: var(--pink-light);
+    border-radius: 10px; display: flex; align-items: center; justify-content: center; margin-bottom: 14px;
   }
   .spec-icon svg { width: 20px; height: 20px; color: var(--pink); }
-
-  .spec-num-label {
-    font-size: 9px; font-weight: 700; letter-spacing: 1.5px;
-    text-transform: uppercase; color: var(--pink); margin-bottom: 6px;
-  }
-  h3.spec-title {
-    font-size: 15px; font-weight: 800; color: var(--dark);
-    letter-spacing: -.3px; margin-bottom: 8px; line-height: 1.2;
-  }
-  .spec-desc {
-    font-size: 11px; color: var(--gray); line-height: 1.7; margin-bottom: 14px;
-  }
+  .spec-num-label { font-size: 9px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--pink); margin-bottom: 6px; }
+  h3.spec-title { font-size: 15px; font-weight: 800; color: var(--dark); letter-spacing: -.3px; margin-bottom: 8px; line-height: 1.2; }
+  .spec-desc { font-size: 11px; color: var(--gray); line-height: 1.7; margin-bottom: 14px; }
   .spec-tags { display: flex; flex-wrap: wrap; gap: 5px; }
-  .tag {
-    font-size: 9.5px; font-weight: 500; color: var(--mid);
-    background: var(--bg); border: 1px solid var(--border);
-    border-radius: 100px; padding: 3px 10px;
-  }
+  .tag { font-size: 9.5px; font-weight: 500; color: var(--mid); background: var(--bg); border: 1px solid var(--border); border-radius: 100px; padding: 3px 10px; }
 
   /* ══════════════════════════════
       EXPERIENCIA
   ══════════════════════════════ */
   .exp-list { display: flex; flex-direction: column; gap: 0; }
-
   .exp-row {
-    display: grid;
-    grid-template-columns: 220px 1fr 140px;
-    gap: 24px;
-    padding: 22px 0;
-    border-bottom: 1px solid var(--border);
-    align-items: start;
+    display: grid; grid-template-columns: 220px 1fr 140px;
+    gap: 24px; padding: 22px 0; border-bottom: 1px solid var(--border); align-items: start;
   }
   .exp-row:last-child { border-bottom: none; }
-
-  .exp-co-block {}
-  h3.exp-co {
-    font-size: 14px; font-weight: 800; color: var(--dark);
-    letter-spacing: -.3px; margin-bottom: 3px;
-  }
-  .exp-loc {
-    font-size: 10.5px; color: var(--gray);
-    display: flex; align-items: center; gap: 4px;
-  }
+  h3.exp-co { font-size: 14px; font-weight: 800; color: var(--dark); letter-spacing: -.3px; margin-bottom: 3px; }
+  .exp-loc { font-size: 10.5px; color: var(--gray); display: flex; align-items: center; gap: 4px; }
   .exp-loc svg { width: 11px; height: 11px; }
-
-  .exp-content {}
-  h4.exp-role {
-    font-size: 12px; font-weight: 700; color: var(--pink);
-    margin-bottom: 6px;
-  }
-  .exp-desc {
-    font-size: 11px; color: var(--mid); line-height: 1.7;
-  }
-
+  h4.exp-role { font-size: 12px; font-weight: 700; color: var(--pink); margin-bottom: 6px; }
+  .exp-desc { font-size: 11px; color: var(--mid); line-height: 1.7; }
   .exp-date-badge {
     display: inline-flex; align-items: center; gap: 5px;
     background: var(--bg); border: 1px solid var(--border);
     border-radius: 100px; padding: 5px 12px;
-    font-size: 10px; font-weight: 600; color: var(--mid);
-    white-space: nowrap;
+    font-size: 10px; font-weight: 600; color: var(--mid); white-space: nowrap;
   }
   .exp-date-badge svg { width: 11px; height: 11px; color: var(--gray); }
   .exp-current { border-color: var(--pink); color: var(--pink); background: var(--pink-light); }
@@ -332,111 +233,67 @@
   /* ══════════════════════════════
       SKILLS GRID
   ══════════════════════════════ */
-  .skills-grid {
-    display: grid; grid-template-columns: repeat(3, 1fr);
-    gap: 14px;
-  }
+  .skills-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
   .skill-card {
-    background: var(--bg);
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    padding: 16px 18px;
+    background: var(--bg); border: 1px solid var(--border);
+    border-radius: 10px; padding: 16px 18px;
     display: flex; gap: 12px; align-items: flex-start;
   }
   .skill-icon {
     width: 32px; height: 32px; flex-shrink: 0;
-    background: var(--pink-light);
-    border-radius: 8px;
+    background: var(--pink-light); border-radius: 8px;
     display: flex; align-items: center; justify-content: center;
   }
   .skill-icon svg { width: 16px; height: 16px; color: var(--pink); }
-  h4.skill-title {
-    font-size: 11px; font-weight: 700; color: var(--dark);
-    margin-bottom: 3px;
-  }
+  h4.skill-title { font-size: 11px; font-weight: 700; color: var(--dark); margin-bottom: 3px; }
   .skill-desc { font-size: 10px; color: var(--gray); line-height: 1.6; }
 
   /* ══════════════════════════════
       BOTTOM GRID
   ══════════════════════════════ */
-  .bottom-grid {
-    display: grid;
-    grid-template-columns: 1.4fr 1fr 1fr;
-    gap: 40px;
-  }
-
-  h3.sub-title {
-    font-size: 13px; font-weight: 800; color: var(--dark);
-    letter-spacing: -.2px; margin-bottom: 16px;
-  }
-
+  .bottom-grid { display: grid; grid-template-columns: 1.4fr 1fr 1fr; gap: 40px; }
+  h3.sub-title { font-size: 13px; font-weight: 800; color: var(--dark); letter-spacing: -.2px; margin-bottom: 16px; }
   .edu-item { margin-bottom: 16px; padding-bottom: 16px; border-bottom: 1px solid var(--border); }
   .edu-item:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
   h4.edu-degree { font-size: 11px; font-weight: 700; color: var(--dark); line-height: 1.4; margin-bottom: 3px; }
   .edu-school { font-size: 10px; color: var(--gray); display: flex; align-items: center; gap: 5px; }
   .edu-date { color: var(--pink); font-weight: 600; }
-
-  .lang-item {
-    display: flex; justify-content: space-between; align-items: center;
-    padding: 10px 0; border-bottom: 1px solid var(--border);
-  }
+  .lang-item { display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid var(--border); }
   .lang-item:last-child { border-bottom: none; }
   .lang-name { font-size: 12px; font-weight: 700; color: var(--dark); }
   .lang-level { font-size: 10px; color: var(--pink); font-weight: 600; }
-
   .comp-wrap { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 4px; }
 
   /* ══════════════════════════════
       CONTACT SECTION
   ══════════════════════════════ */
   .contact-section {
-    background: var(--dark);
-    padding: 64px 52px 52px;
+    background: var(--dark); padding: 64px 52px 52px;
     position: relative; overflow: hidden;
   }
   .contact-section::before {
-    content: '';
-    position: absolute; top: -80px; right: -80px;
+    content: ''; position: absolute; top: -80px; right: -80px;
     width: 300px; height: 300px; border-radius: 50%;
     background: radial-gradient(circle, rgba(224,0,127,.18) 0%, transparent 70%);
     pointer-events: none;
   }
-
   .contact-label {
     font-size: 10px; font-weight: 700; letter-spacing: 2.5px;
     text-transform: uppercase; color: var(--pink);
-    display: flex; align-items: center; gap: 8px;
-    margin-bottom: 12px;
+    display: flex; align-items: center; gap: 8px; margin-bottom: 12px;
   }
-  .contact-label::before {
-    content: ''; width: 20px; height: 1.5px; background: var(--pink);
-  }
-
+  .contact-label::before { content: ''; width: 20px; height: 1.5px; background: var(--pink); }
   .contact-headline {
-    font-size: clamp(36px, 5vw, 60px);
-    font-weight: 900;
-    letter-spacing: -2px;
-    line-height: .95;
-    color: var(--white);
-    margin-bottom: 40px;
+    font-size: clamp(36px, 5vw, 60px); font-weight: 900;
+    letter-spacing: -2px; line-height: .95; color: var(--white); margin-bottom: 40px;
   }
   .contact-headline em { font-style: normal; color: var(--pink); }
-
-  .contact-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 40px;
-    align-items: end;
-  }
-
+  .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: end; }
   .contact-items { display: flex; flex-direction: column; gap: 16px; }
-  .contact-item {
-    display: flex; align-items: center; gap: 14px;
-  }
+  .contact-item { display: flex; align-items: center; gap: 14px; }
   .contact-item-icon {
     width: 40px; height: 40px; flex-shrink: 0;
-    border: 1px solid rgba(255,255,255,.12);
-    border-radius: 10px;
+    border: 1px solid rgba(255,255,255,.12); border-radius: 10px;
     display: flex; align-items: center; justify-content: center;
   }
   .contact-item-icon svg { width: 18px; height: 18px; color: var(--pink); }
@@ -444,22 +301,131 @@
   .contact-item-val { font-size: 12px; font-weight: 600; color: var(--white); }
   .contact-item-val a { color: var(--white); text-decoration: none; transition: color .2s; }
   .contact-item-val a:hover { color: var(--pink); }
-
   .contact-right { text-align: right; }
   .contact-logo-e { font-size: 52px; font-weight: 900; color: rgba(255,255,255,.06); letter-spacing: -4px; line-height: 1; }
   .contact-logo-name { font-size: 9px; font-weight: 700; letter-spacing: 5px; color: rgba(255,255,255,.2); }
   .contact-copy { font-size: 10px; color: rgba(255,255,255,.25); margin-top: 16px; }
+
+  /* ══════════════════════════════
+      RESPONSIVE — TABLET ≤ 900px
+  ══════════════════════════════ */
+  @media (max-width: 900px) {
+
+    /* Nav */
+    .no-print { padding: 12px 24px; }
+    .no-print .np-roles { display: none; }
+
+    /* Page */
+    .page { border-radius: 0; margin-bottom: 0; }
+
+    /* Hero */
+    .hero { grid-template-columns: 1fr; min-height: auto; }
+    .hero-right { min-height: 320px; order: -1; }
+    .hero-left { padding: 36px 32px 32px; }
+    .hero-badge { bottom: 16px; left: 16px; }
+
+    /* Stats */
+    .stats-bar { grid-template-columns: repeat(2, 1fr); }
+    .stat-item:nth-child(2) { border-right: none; }
+    .stat-item:nth-child(3) { border-top: 1px solid var(--border); }
+    .stat-item:nth-child(4) { border-top: 1px solid var(--border); border-right: none; }
+    .stat-item { padding: 20px 24px; }
+    .stat-num { font-size: 28px; }
+
+    /* Sections */
+    .section { padding: 40px 32px; }
+
+    /* Spec */
+    .spec-grid { grid-template-columns: 1fr 1fr; }
+
+    /* Exp */
+    .exp-row { grid-template-columns: 1fr 1fr; grid-template-rows: auto auto; gap: 12px; }
+    .exp-row > div:last-child { grid-column: 1; grid-row: 1; }
+    .exp-row > div:first-child { grid-column: 1; grid-row: 2; }
+    .exp-row > div:nth-child(2) { grid-column: 2; grid-row: 1 / 3; }
+
+    /* Skills */
+    .skills-grid { grid-template-columns: 1fr 1fr; }
+
+    /* Bottom */
+    .bottom-grid { grid-template-columns: 1fr 1fr; gap: 32px; }
+    .bottom-grid > div:first-child { grid-column: 1 / -1; }
+
+    /* Contact */
+    .contact-section { padding: 48px 32px 40px; }
+    .contact-grid { grid-template-columns: 1fr; }
+    .contact-right { display: none; }
+  }
+
+  /* ══════════════════════════════
+      RESPONSIVE — MOBILE ≤ 600px
+  ══════════════════════════════ */
+  @media (max-width: 600px) {
+
+    /* Nav */
+    .no-print { padding: 10px 16px; }
+    .no-print .np-logo { font-size: 12px; }
+    .no-print button { padding: 7px 14px; font-size: 10px; }
+
+    /* Hero */
+    .hero-right { min-height: 260px; }
+    .hero-left { padding: 28px 20px 24px; }
+    .hero-name { letter-spacing: -2px; }
+    .hero-summary { font-size: 12px; }
+    .hero-badge { padding: 10px 14px; left: 12px; bottom: 12px; }
+    .hero-badge strong { font-size: 17px; }
+    .hero-contact-bar { gap: 12px; }
+
+    /* Stats */
+    .stats-bar { grid-template-columns: 1fr 1fr; }
+    .stat-item { padding: 16px; }
+    .stat-num { font-size: 24px; letter-spacing: -1px; }
+    .stat-label { font-size: 10px; }
+
+    /* Sections */
+    .section { padding: 32px 20px; }
+    h2.section-title { font-size: 22px; }
+
+    /* Spec — 1 col */
+    .spec-grid { grid-template-columns: 1fr; }
+
+    /* Exp — stack completo */
+    .exp-row {
+      grid-template-columns: 1fr;
+      grid-template-rows: auto auto auto;
+      gap: 8px; padding: 18px 0;
+    }
+    .exp-row > div:last-child  { order: -1; }
+    .exp-row > div:first-child { order: 1; }
+    .exp-row > div:nth-child(2){ order: 2; }
+    h3.exp-co { font-size: 13px; }
+    .exp-date-badge { font-size: 9.5px; }
+
+    /* Skills — 1 col */
+    .skills-grid { grid-template-columns: 1fr; }
+
+    /* Bottom — 1 col */
+    .bottom-grid { grid-template-columns: 1fr; gap: 28px; }
+    .bottom-grid > div:first-child { grid-column: auto; }
+
+    /* Contact */
+    .contact-section { padding: 36px 20px 32px; }
+    .contact-headline { letter-spacing: -1px; margin-bottom: 28px; }
+    .contact-grid { grid-template-columns: 1fr; }
+    .contact-item-val { font-size: 11px; }
+    .contact-item-val a[href*="linkedin"] { word-break: break-all; }
+  }
 </style>
 </head>
 <body>
 
 <div class="no-print">
   <div class="np-logo">Ǝ ESCRICHS</div>
-  <div style="display:flex;gap:24px;align-items:center;font-size:11px;color:#888;">
+  <div class="np-roles">
     <span>Digital Project Manager</span>
-    <span style="color:#e0e0e0;">·</span>
+    <span class="sep">·</span>
     <span>Senior Marketing Specialist</span>
-    <span style="color:#e0e0e0;">·</span>
+    <span class="sep">·</span>
     <span>UX/UI Designer</span>
   </div>
   <button onclick="window.print()">↓ Descargar PDF</button>
@@ -545,53 +511,33 @@
       </div>
     </div>
     <div class="spec-grid">
-
       <div class="spec-card">
-        <div class="spec-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 17H7A5 5 0 0 1 7 7h2M15 7h2a5 5 0 0 1 0 10h-2M11 12h2"/></svg>
-        </div>
+        <div class="spec-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 17H7A5 5 0 0 1 7 7h2M15 7h2a5 5 0 0 1 0 10h-2M11 12h2"/></svg></div>
         <div class="spec-num-label">01 — Project</div>
         <h3 class="spec-title">Digital Project Manager</h3>
         <p class="spec-desc">+10 años liderando proyectos de marketing digital end-to-end: estrategia, ejecución y entrega de resultados medibles.</p>
         <div class="spec-tags">
-          <span class="tag">Estrategia 360°</span>
-          <span class="tag">Funnels</span>
-          <span class="tag">Timings</span>
-          <span class="tag">Presupuestos</span>
-          <span class="tag">Data-driven</span>
+          <span class="tag">Estrategia 360°</span><span class="tag">Funnels</span><span class="tag">Timings</span><span class="tag">Presupuestos</span><span class="tag">Data-driven</span>
         </div>
       </div>
-
       <div class="spec-card">
-        <div class="spec-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 20h9M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
-        </div>
+        <div class="spec-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 20h9M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg></div>
         <div class="spec-num-label">02 — Marketing</div>
         <h3 class="spec-title">Senior Marketing Specialist</h3>
         <p class="spec-desc">Estrategia de marca global, campañas integradas y gestión de eventos corporativos en mercados internacionales.</p>
         <div class="spec-tags">
-          <span class="tag">Branding Global</span>
-          <span class="tag">Campañas</span>
-          <span class="tag">Eventos</span>
-          <span class="tag">PR &amp; Medios</span>
+          <span class="tag">Branding Global</span><span class="tag">Campañas</span><span class="tag">Eventos</span><span class="tag">PR &amp; Medios</span>
         </div>
       </div>
-
       <div class="spec-card">
-        <div class="spec-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M3 9h18M9 21V9"/></svg>
-        </div>
+        <div class="spec-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M3 9h18M9 21V9"/></svg></div>
         <div class="spec-num-label">03 — Design</div>
         <h3 class="spec-title">UX / UI Designer</h3>
         <p class="spec-desc">Diseño de productos digitales centrados en el usuario: interfaces, flujos y prototipos para web, app y escritorio.</p>
         <div class="spec-tags">
-          <span class="tag">Figma</span>
-          <span class="tag">Adobe XD</span>
-          <span class="tag">HTML5/CSS3</span>
-          <span class="tag">Zepplin</span>
+          <span class="tag">Figma</span><span class="tag">Adobe XD</span><span class="tag">HTML5/CSS3</span><span class="tag">Zepplin</span>
         </div>
       </div>
-
     </div>
   </div>
 
@@ -607,109 +553,73 @@
       <div class="exp-row">
         <div class="exp-co-block">
           <h3 class="exp-co">Giunti Psychometrics</h3>
-          <div class="exp-loc">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-            Granada
-          </div>
+          <div class="exp-loc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>Granada</div>
         </div>
         <div class="exp-content">
           <h4 class="exp-role">Corporate Marketing Senior Specialist</h4>
           <p class="exp-desc">Estrategia global de branding e identidad visual. Campañas corporativas integradas. Coordinación de eventos (ferias, conferencias, lanzamientos). Liderazgo creativo de contenido multimedia. Enlace entre equipos regionales. Gestión de PR y relaciones con medios.</p>
         </div>
-        <div><span class="exp-date-badge exp-current">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-          Nov 2024 — Act.
-        </span></div>
+        <div><span class="exp-date-badge exp-current"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>Nov 2024 — Act.</span></div>
       </div>
 
       <div class="exp-row">
         <div class="exp-co-block">
           <h3 class="exp-co">Experian</h3>
-          <div class="exp-loc">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-            Granada
-          </div>
+          <div class="exp-loc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>Granada</div>
         </div>
         <div class="exp-content">
           <h4 class="exp-role">Senior Marketing Specialist &amp; Graphic Designer</h4>
           <p class="exp-desc">Lanzamientos de productos y campañas integradas. Investigación y análisis de datos. Gestión de contenidos web. Planificación y producción de eventos.</p>
         </div>
-        <div><span class="exp-date-badge">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-          2021 — Oct 2024
-        </span></div>
+        <div><span class="exp-date-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>2021 — Oct 2024</span></div>
       </div>
 
       <div class="exp-row">
         <div class="exp-co-block">
           <h3 class="exp-co">Axesor</h3>
-          <div class="exp-loc">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-            Granada
-          </div>
+          <div class="exp-loc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>Granada</div>
         </div>
         <div class="exp-content">
           <h4 class="exp-role">Senior Graphic Designer &amp; UX/UI</h4>
           <p class="exp-desc">Responsable de Branding y desarrollo de proyectos web. Diseño UX/UI de productos para las distintas líneas de negocio.</p>
         </div>
-        <div><span class="exp-date-badge">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-          2014 — 2021
-        </span></div>
+        <div><span class="exp-date-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>2014 — 2021</span></div>
       </div>
 
       <div class="exp-row">
         <div class="exp-co-block">
           <h3 class="exp-co">Saants DI</h3>
-          <div class="exp-loc">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-            Barcelona
-          </div>
+          <div class="exp-loc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>Barcelona</div>
         </div>
         <div class="exp-content">
           <h4 class="exp-role">Supervisor Marketing / Arte</h4>
           <p class="exp-desc">Dirección de arte, estrategia on-off, publicidad, diseño web y redes sociales. Proyectos web, editorial y branding.</p>
         </div>
-        <div><span class="exp-date-badge">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-          2010 — 2014
-        </span></div>
+        <div><span class="exp-date-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>2010 — 2014</span></div>
       </div>
 
       <div class="exp-row">
         <div class="exp-co-block">
           <h3 class="exp-co">Freelance</h3>
-          <div class="exp-loc">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-            Barcelona · Remote
-          </div>
+          <div class="exp-loc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>Barcelona · Remote</div>
         </div>
         <div class="exp-content">
           <h4 class="exp-role">Diseñador &amp; Consultor Digital</h4>
           <p class="exp-desc">Branding, proyectos web, material promocional, eventos y Community Manager.</p>
         </div>
-        <div><span class="exp-date-badge exp-current">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-          2010 — Act.
-        </span></div>
+        <div><span class="exp-date-badge exp-current"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>2010 — Act.</span></div>
       </div>
 
       <div class="exp-row">
         <div class="exp-co-block">
           <h3 class="exp-co">EAG / Adyta / NTS</h3>
-          <div class="exp-loc">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-            Granada · Netherlands
-          </div>
+          <div class="exp-loc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>Granada · Netherlands</div>
         </div>
         <div class="exp-content">
           <h4 class="exp-role">Profesor · Diseñador Gráfico</h4>
           <p class="exp-desc">Formación en proyectos online (EAG). Diseño web y branding (Adyta, NTS Koala Global).</p>
         </div>
-        <div><span class="exp-date-badge">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-          2006 — 2014
-        </span></div>
+        <div><span class="exp-date-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>2006 — 2014</span></div>
       </div>
 
     </div>
@@ -724,58 +634,28 @@
     </div>
     <div class="skills-grid">
       <div class="skill-card">
-        <div class="skill-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2M9 9h.01M15 9h.01"/></svg>
-        </div>
-        <div>
-          <h4 class="skill-title">Diseño &amp; Creatividad</h4>
-          <p class="skill-desc">Adobe CC, Acrobat PRO. Motion Graphics, Ilustración, Animación 2D/3D.</p>
-        </div>
+        <div class="skill-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2M9 9h.01M15 9h.01"/></svg></div>
+        <div><h4 class="skill-title">Diseño &amp; Creatividad</h4><p class="skill-desc">Adobe CC, Acrobat PRO. Motion Graphics, Ilustración, Animación 2D/3D.</p></div>
       </div>
       <div class="skill-card">
-        <div class="skill-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
-        </div>
-        <div>
-          <h4 class="skill-title">UX/UI &amp; Prototipado</h4>
-          <p class="skill-desc">Figma, Adobe XD, Zepplin. Flujos de interacción y diseño de producto.</p>
-        </div>
+        <div class="skill-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg></div>
+        <div><h4 class="skill-title">UX/UI &amp; Prototipado</h4><p class="skill-desc">Figma, Adobe XD, Zepplin. Flujos de interacción y diseño de producto.</p></div>
       </div>
       <div class="skill-card">
-        <div class="skill-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
-        </div>
-        <div>
-          <h4 class="skill-title">Desarrollo Front-end</h4>
-          <p class="skill-desc">HTML5, CSS3, Bootstrap, jQuery. Landing pages y Web APP.</p>
-        </div>
+        <div class="skill-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg></div>
+        <div><h4 class="skill-title">Desarrollo Front-end</h4><p class="skill-desc">HTML5, CSS3, Bootstrap, jQuery. Landing pages y Web APP.</p></div>
       </div>
       <div class="skill-card">
-        <div class="skill-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 3l7.07 16.97 2.51-7.39 7.39-2.51L3 3z"/></svg>
-        </div>
-        <div>
-          <h4 class="skill-title">Marketing Automation</h4>
-          <p class="skill-desc">Oracle Eloqua. Diseño y maquetación en Marketing Digital.</p>
-        </div>
+        <div class="skill-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 3l7.07 16.97 2.51-7.39 7.39-2.51L3 3z"/></svg></div>
+        <div><h4 class="skill-title">Marketing Automation</h4><p class="skill-desc">Oracle Eloqua. Diseño y maquetación en Marketing Digital.</p></div>
       </div>
       <div class="skill-card">
-        <div class="skill-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
-        </div>
-        <div>
-          <h4 class="skill-title">Análisis &amp; Datos</h4>
-          <p class="skill-desc">Google Analytics, Google Studio, Hotjar. Investigación y testing.</p>
-        </div>
+        <div class="skill-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg></div>
+        <div><h4 class="skill-title">Análisis &amp; Datos</h4><p class="skill-desc">Google Analytics, Google Studio, Hotjar. Investigación y testing.</p></div>
       </div>
       <div class="skill-card">
-        <div class="skill-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
-        </div>
-        <div>
-          <h4 class="skill-title">Gestión de Proyectos</h4>
-          <p class="skill-desc">Confluence, Jira, Slack, Monday. Planificación y control.</p>
-        </div>
+        <div class="skill-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg></div>
+        <div><h4 class="skill-title">Gestión de Proyectos</h4><p class="skill-desc">Confluence, Jira, Slack, Monday. Planificación y control.</p></div>
       </div>
     </div>
   </div>
@@ -788,57 +668,26 @@
       </div>
     </div>
     <div class="bottom-grid">
-
       <div>
         <h3 class="sub-title">Formación Académica</h3>
-        <div class="edu-item">
-          <h4 class="edu-degree">ThePowerDigitalMarketing · Marketing Expert</h4>
-          <div class="edu-school">ThePowerMBA &nbsp;<span class="edu-date">2020 / 2022</span></div>
-        </div>
-        <div class="edu-item">
-          <h4 class="edu-degree">Máster Animación Avanzada 3D · Kandor Graphics</h4>
-          <div class="edu-school">UGR Universidad de Granada &nbsp;<span class="edu-date">2012</span></div>
-        </div>
-        <div class="edu-item">
-          <h4 class="edu-degree">Diplomatura Diseño Gráfico</h4>
-          <div class="edu-school">EAG Escuela Arte Granada &nbsp;<span class="edu-date">2010</span></div>
-        </div>
-        <div class="edu-item">
-          <h4 class="edu-degree">Diseño Arte Final</h4>
-          <div class="edu-school">Escola Llotja, Barcelona &nbsp;<span class="edu-date">2006 / 07</span></div>
-        </div>
+        <div class="edu-item"><h4 class="edu-degree">ThePowerDigitalMarketing · Marketing Expert</h4><div class="edu-school">ThePowerMBA &nbsp;<span class="edu-date">2020 / 2022</span></div></div>
+        <div class="edu-item"><h4 class="edu-degree">Máster Animación Avanzada 3D · Kandor Graphics</h4><div class="edu-school">UGR Universidad de Granada &nbsp;<span class="edu-date">2012</span></div></div>
+        <div class="edu-item"><h4 class="edu-degree">Diplomatura Diseño Gráfico</h4><div class="edu-school">EAG Escuela Arte Granada &nbsp;<span class="edu-date">2010</span></div></div>
+        <div class="edu-item"><h4 class="edu-degree">Diseño Arte Final</h4><div class="edu-school">Escola Llotja, Barcelona &nbsp;<span class="edu-date">2006 / 07</span></div></div>
       </div>
-
       <div>
         <h3 class="sub-title">Idiomas</h3>
-        <div class="lang-item">
-          <span class="lang-name">Castellano</span>
-          <span class="lang-level">Nativo · Bilingüe</span>
-        </div>
-        <div class="lang-item">
-          <span class="lang-name">Catalán</span>
-          <span class="lang-level">Nativo · Bilingüe</span>
-        </div>
-        <div class="lang-item">
-          <span class="lang-name">Inglés</span>
-          <span class="lang-level">Conversación</span>
-        </div>
-
+        <div class="lang-item"><span class="lang-name">Castellano</span><span class="lang-level">Nativo · Bilingüe</span></div>
+        <div class="lang-item"><span class="lang-name">Catalán</span><span class="lang-level">Nativo · Bilingüe</span></div>
+        <div class="lang-item"><span class="lang-name">Inglés</span><span class="lang-level">Conversación</span></div>
         <br>
         <h3 class="sub-title">Otros</h3>
-        <div class="lang-item">
-          <span class="lang-name" style="font-size:11px;font-weight:500;color:var(--mid);">Permiso de conducir B</span>
-          <span class="lang-level">Vehículo propio</span>
-        </div>
+        <div class="lang-item"><span class="lang-name" style="font-size:11px;font-weight:500;color:var(--mid);">Permiso de conducir B</span><span class="lang-level">Vehículo propio</span></div>
       </div>
-
       <div>
         <h3 class="sub-title">Competencias</h3>
         <div class="comp-wrap">
-          <span class="pill" style="font-size:10px;padding:5px 12px;">
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-            Liderazgo
-          </span>
+          <span class="pill" style="font-size:10px;padding:5px 12px;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>Liderazgo</span>
           <span class="pill" style="font-size:10px;padding:5px 12px;">Trabajo en equipo</span>
           <span class="pill" style="font-size:10px;padding:5px 12px;">Comunicación</span>
           <span class="pill" style="font-size:10px;padding:5px 12px;">Creatividad</span>
@@ -846,67 +695,39 @@
           <span class="pill" style="font-size:10px;padding:5px 12px;">Orientación a resultados</span>
         </div>
       </div>
-
     </div>
   </div>
 
   <div class="contact-section">
     <div class="contact-label">Contacto</div>
     <div class="contact-headline">Trabajemos<br>juntos.</div>
-
     <div class="contact-grid">
       <div class="contact-items">
-
         <div class="contact-item">
-          <div class="contact-item-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M22 16.92v3a2 2 0 0 1-2.18 2A19.79 19.79 0 0 1 3.09 4.18 2 2 0 0 1 5.07 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L9.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-          </div>
-          <div>
-            <div class="contact-item-label">Teléfono</div>
-            <div class="contact-item-val"><a href="tel:665029003">665 02 90 03</a></div>
-          </div>
+          <div class="contact-item-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M22 16.92v3a2 2 0 0 1-2.18 2A19.79 19.79 0 0 1 3.09 4.18 2 2 0 0 1 5.07 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L9.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg></div>
+          <div><div class="contact-item-label">Teléfono</div><div class="contact-item-val"><a href="tel:665029003">665 02 90 03</a></div></div>
         </div>
-
         <div class="contact-item">
-          <div class="contact-item-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-          </div>
-          <div>
-            <div class="contact-item-label">Email</div>
-            <div class="contact-item-val"><a href="mailto:albertescrichs@gmail.com">albertescrichs@gmail.com</a></div>
-          </div>
+          <div class="contact-item-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
+          <div><div class="contact-item-label">Email</div><div class="contact-item-val"><a href="mailto:albertescrichs@gmail.com">albertescrichs@gmail.com</a></div></div>
         </div>
-
         <div class="contact-item">
-          <div class="contact-item-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
-          </div>
-          <div>
-            <div class="contact-item-label">LinkedIn</div>
-            <div class="contact-item-val"><a href="https://es.linkedin.com/in/albertescrichs" target="_blank">es.linkedin.com/in/albertescrichs ↗</a></div>
-          </div>
+          <div class="contact-item-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></div>
+          <div><div class="contact-item-label">LinkedIn</div><div class="contact-item-val"><a href="https://es.linkedin.com/in/albertescrichs" target="_blank">es.linkedin.com/in/albertescrichs ↗</a></div></div>
         </div>
-
         <div class="contact-item">
-          <div class="contact-item-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-          </div>
-          <div>
-            <div class="contact-item-label">Ubicación</div>
-            <div class="contact-item-val">C/ Neptuno nº6 · 18004, Granada</div>
-          </div>
+          <div class="contact-item-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+          <div><div class="contact-item-label">Ubicación</div><div class="contact-item-val">C/ Neptuno nº6 · 18004, Granada</div></div>
         </div>
-
       </div>
-
       <div class="contact-right">
         <div class="contact-logo-e">Ǝ</div>
         <div class="contact-logo-name">ESCRICHS</div>
         <div class="contact-copy">© 2026 · Albert Escrichs · Todos los derechos reservados</div>
       </div>
     </div>
-
   </div>
 
-</div></body>
+</div>
+</body>
 </html>
