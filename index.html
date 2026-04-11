@@ -10,6 +10,9 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 <!-- jQuery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<!-- html2canvas + jsPDF -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
@@ -404,6 +407,31 @@ h4.edu-degree{font-size:11px;font-weight:700;color:var(--dark);line-height:1.4;m
 /* ─── REVEAL UTILITY ─────────────── */
 .reveal{opacity:0;transform:translateY(28px);}
 
+  /* ─── PDF OVERLAY ────────────────── */
+.pdf-overlay{
+  position:fixed;inset:0;background:rgba(13,13,13,.85);
+  z-index:9999;display:none;align-items:center;justify-content:center;
+  flex-direction:column;gap:16px;backdrop-filter:blur(6px);
+}
+.pdf-overlay.active{display:flex;}
+.pdf-spinner{
+  width:48px;height:48px;border-radius:50%;
+  border:3px solid rgba(255,255,255,.15);
+  border-top-color:var(--pink);
+  animation:spin .8s linear infinite;
+}
+@keyframes spin{to{transform:rotate(360deg);}}
+.pdf-msg{color:#fff;font-size:13px;font-weight:600;letter-spacing:.3px;}
+.pdf-sub{color:rgba(255,255,255,.4);font-size:11px;}
+
+/* ─── PDF SNAPSHOT (hidden clone) ── */
+#pdfSnapshot{
+  position:fixed;left:-9999px;top:0;
+  width:1100px;background:#fff;
+  font-family:'Inter',sans-serif;
+  -webkit-font-smoothing:antialiased;
+}
+
 /* ─── PRINT ──────────────────────── */
 @media print{
   .nav,.cursor,.cursor-ring,.progress-bar,.scroll-top{display:none!important;}
@@ -483,6 +511,13 @@ h4.edu-degree{font-size:11px;font-weight:700;color:var(--dark);line-height:1.4;m
 <!-- Progress bar -->
 <div class="progress-bar" id="progressBar"></div>
 
+<!-- PDF Overlay -->
+<div class="pdf-overlay" id="pdfOverlay">
+  <div class="pdf-spinner"></div>
+  <div class="pdf-msg">Generando PDF…</div>
+  <div class="pdf-sub">Esto puede tardar unos segundos</div>
+</div>
+
 <!-- NAV -->
 <nav class="nav" id="mainNav">
   <a href="#" class="nav-logo"><span class="logo-e">Ǝ</span>&nbsp;ESCRICHS</a>
@@ -493,7 +528,7 @@ h4.edu-degree{font-size:11px;font-weight:700;color:var(--dark);line-height:1.4;m
     <a href="#formacion">Formación</a>
     <a href="#contacto">Contacto</a>
   </div>
-  <button class="nav-btn" onclick="window.print()">↓ Descargar PDF</button>
+  <button class="nav-btn" id="downloadPdf">↓ Descargar PDF</button>
   <button class="nav-menu-btn" id="menuBtn" aria-label="Menú">
     <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#444" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
   </button>
@@ -507,7 +542,7 @@ h4.edu-degree{font-size:11px;font-weight:700;color:var(--dark);line-height:1.4;m
   <a href="#skills">Skills</a>
   <a href="#formacion">Formación</a>
   <a href="#contacto">Contacto</a>
-  <button class="nav-btn" style="margin-top:16px;width:100%;" onclick="window.print()">↓ Descargar PDF</button>
+  <button class="nav-btn" id="downloadPdfMobile" style="margin-top:16px;width:100%;">↓ Descargar PDF</button>
 </div>
 <div class="nav-overlay" id="navOverlay"></div>
 
@@ -741,7 +776,6 @@ $(function(){
     .to('#heroContact',        {opacity:1,duration:.6},'<.2')
     .to('#heroBadge',          {opacity:1,x:0,duration:.7,ease:'back.out(1.5)'},'<.2');
 
-  /* Image load zoom */
   $('#heroImg').on('load',function(){$(this).addClass('loaded');}).each(function(){
     if(this.complete) $(this).addClass('loaded');
   });
@@ -757,75 +791,47 @@ $(function(){
 
   /* ── GENERIC REVEAL ── */
   gsap.utils.toArray('.reveal').forEach(el=>{
-    gsap.fromTo(el,
-      {opacity:0,y:28},
-      {opacity:1,y:0,duration:.7,ease:'power3.out',
-       scrollTrigger:{trigger:el,start:'top 85%',toggleActions:'play none none none'}}
-    );
+    gsap.fromTo(el,{opacity:0,y:28},{opacity:1,y:0,duration:.7,ease:'power3.out',
+      scrollTrigger:{trigger:el,start:'top 85%',toggleActions:'play none none none'}});
   });
 
-  /* ── SPEC CARDS stagger ── */
+  /* ── SPEC CARDS ── */
   gsap.utils.toArray('.spec-card').forEach((card,i)=>{
-    gsap.to(card,{
-      opacity:1,y:0,duration:.7,ease:'power3.out',
-      scrollTrigger:{trigger:card,start:'top 88%'},
-      delay:i*0.1
-    });
+    gsap.to(card,{opacity:1,y:0,duration:.7,ease:'power3.out',
+      scrollTrigger:{trigger:card,start:'top 88%'},delay:i*.1});
   });
 
-  /* ── EXP ROWS stagger ── */
+  /* ── EXP ROWS ── */
   gsap.utils.toArray('.exp-row').forEach((row,i)=>{
-    gsap.to(row,{
-      opacity:1,x:0,duration:.65,ease:'power3.out',
-      scrollTrigger:{trigger:row,start:'top 88%'},
-      delay:i*0.08
-    });
+    gsap.to(row,{opacity:1,x:0,duration:.65,ease:'power3.out',
+      scrollTrigger:{trigger:row,start:'top 88%'},delay:i*.08});
   });
 
-  /* ── SKILL CARDS stagger ── */
+  /* ── SKILL CARDS ── */
   gsap.utils.toArray('.skill-card').forEach((card,i)=>{
-    gsap.to(card,{
-      opacity:1,y:0,duration:.6,ease:'power3.out',
-      scrollTrigger:{trigger:card,start:'top 90%'},
-      delay:i*0.07
-    });
+    gsap.to(card,{opacity:1,y:0,duration:.6,ease:'power3.out',
+      scrollTrigger:{trigger:card,start:'top 90%'},delay:i*.07});
   });
 
-  /* ── COUNTER ANIMATION ── */
+  /* ── COUNTER ── */
   gsap.utils.toArray('.stat-num[data-count]').forEach(el=>{
-    const target = +el.dataset.count;
-    const suffix = el.querySelector('span').outerHTML;
-    ScrollTrigger.create({
-      trigger:el,start:'top 85%',once:true,
+    const target=+el.dataset.count, suffix=el.querySelector('span').outerHTML;
+    ScrollTrigger.create({trigger:el,start:'top 85%',once:true,
       onEnter:()=>{
-        $({n:0}).animate({n:target},{
-          duration:1200,easing:'swing',
+        $({n:0}).animate({n:target},{duration:1200,easing:'swing',
           step:function(){$(el).html(Math.floor(this.n)+suffix);},
-          complete:function(){$(el).html(target+suffix);}
-        });
+          complete:function(){$(el).html(target+suffix);}});
       }
     });
   });
 
   /* ── NAV SCROLL ── */
   $(window).on('scroll',function(){
-    const scrollY = $(this).scrollTop();
-    const winH    = $(this).height();
-    const docH    = $(document).height();
-
-    // Nav style
+    const scrollY=$(this).scrollTop(), winH=$(this).height(), docH=$(document).height();
     scrollY>40 ? $('#mainNav').addClass('scrolled') : $('#mainNav').removeClass('scrolled');
-
-    // Progress bar
-    const pct = (scrollY/(docH-winH))*100;
-    $('#progressBar').css('width',pct+'%');
-
-    // Scroll-to-top
+    $('#progressBar').css('width',(scrollY/(docH-winH))*100+'%');
     scrollY>300 ? $('#scrollTop').addClass('visible') : $('#scrollTop').removeClass('visible');
-
-    // Active nav link
-    const sections=['hero','especializacion','experiencia','skills','formacion','contacto'];
-    sections.forEach(id=>{
+    ['hero','especializacion','experiencia','skills','formacion','contacto'].forEach(id=>{
       const el=$('#'+id);
       if(!el.length) return;
       const top=el.offset().top-80, bottom=top+el.outerHeight();
@@ -836,44 +842,128 @@ $(function(){
     });
   });
 
-  /* ── SCROLL TO TOP ── */
-  $('#scrollTop').on('click',function(){
-    $('html,body').animate({scrollTop:0},600,'swing');
-  });
+  /* ── SCROLL TOP ── */
+  $('#scrollTop').on('click',function(){$('html,body').animate({scrollTop:0},600,'swing');});
 
   /* ── MOBILE NAV ── */
-  $('#menuBtn').on('click',function(){
-    $('#mobileNav').addClass('open');
-    $('#navOverlay').addClass('active');
-  });
-  $('#closeNav, #navOverlay').on('click',function(){
-    $('#mobileNav').removeClass('open');
-    $('#navOverlay').removeClass('active');
-  });
-  $('#mobileNav a').on('click',function(){
-    $('#mobileNav').removeClass('open');
-    $('#navOverlay').removeClass('active');
-  });
+  $('#menuBtn').on('click',function(){$('#mobileNav').addClass('open');$('#navOverlay').addClass('active');});
+  $('#closeNav,#navOverlay').on('click',function(){$('#mobileNav').removeClass('open');$('#navOverlay').removeClass('active');});
+  $('#mobileNav a').on('click',function(){$('#mobileNav').removeClass('open');$('#navOverlay').removeClass('active');});
 
   /* ── SMOOTH SCROLL ── */
   $('a[href^="#"]').on('click',function(e){
-    const target=$(this.getAttribute('href'));
-    if(target.length){
-      e.preventDefault();
-      $('html,body').animate({scrollTop:target.offset().top-64},700,'swing');
-    }
+    const t=$(this.getAttribute('href'));
+    if(t.length){e.preventDefault();$('html,body').animate({scrollTop:t.offset().top-64},700,'swing');}
   });
 
   /* ── CUSTOM CURSOR ── */
   $(document).on('mousemove',function(e){
-    gsap.to('#cursor',     {x:e.clientX,y:e.clientY,duration:.1});
-    gsap.to('#cursorRing', {x:e.clientX,y:e.clientY,duration:.35});
+    gsap.to('#cursor',{x:e.clientX,y:e.clientY,duration:.1});
+    gsap.to('#cursorRing',{x:e.clientX,y:e.clientY,duration:.35});
   });
   $('a,button,.pill,.spec-card,.skill-card,.stat-item,.tag').on('mouseenter',function(){
     $('#cursor,#cursorRing').addClass('hover');
-  }).on('mouseleave',function(){
-    $('#cursor,#cursorRing').removeClass('hover');
-  });
+  }).on('mouseleave',function(){$('#cursor,#cursorRing').removeClass('hover');});
+
+  /* ════════════════════════════════════
+     PDF GENERATION — jsPDF + html2canvas
+  ════════════════════════════════════ */
+  async function generatePDF(){
+    const {jsPDF} = window.jspdf;
+
+    // Show overlay
+    $('#pdfOverlay').addClass('active');
+
+    try {
+      // Build a clean snapshot element — all animations reset, no nav
+      const source = document.querySelector('.page');
+
+      // Temporarily force all animated elements visible & reset transforms
+      const animated = source.querySelectorAll('*');
+      const savedStyles = [];
+      animated.forEach(el=>{
+        savedStyles.push({el, opacity:el.style.opacity, transform:el.style.transform});
+        el.style.opacity='1';
+        el.style.transform='none';
+      });
+
+      // Capture at 2× for retina sharpness, A4 width = 794px at 96dpi
+      const canvas = await html2canvas(source,{
+        scale: 2,
+        useCORS: true,
+        allowTaint: true,
+        backgroundColor: '#ffffff',
+        width: source.scrollWidth,
+        height: source.scrollHeight,
+        windowWidth: 1100,
+        logging: false,
+        onclone: (clonedDoc) => {
+          // On the clone: make everything fully visible
+          clonedDoc.querySelectorAll('*').forEach(el=>{
+            el.style.opacity='1';
+            el.style.transform='none';
+            el.style.transition='none';
+            el.style.animation='none';
+          });
+          // Hide cursor & progress bar from clone
+          ['#cursor','#cursorRing','#progressBar','#scrollTop','#pdfOverlay']
+            .forEach(sel=>{ const n=clonedDoc.querySelector(sel); if(n) n.style.display='none'; });
+        }
+      });
+
+      // Restore original styles
+      savedStyles.forEach(({el,opacity,transform})=>{
+        el.style.opacity=opacity;
+        el.style.transform=transform;
+      });
+
+      // A4 dimensions in mm
+      const A4_W = 210, A4_H = 297;
+      const imgW  = canvas.width, imgH = canvas.height;
+
+      // Scale so page width = A4 width
+      const ratio   = A4_W / (imgW / 2); // /2 because scale:2
+      const totalMM = (imgH / 2) * ratio;
+
+      // Multi-page: slice canvas into A4 chunks
+      const pdf = new jsPDF({orientation:'portrait',unit:'mm',format:'a4',compress:true});
+      const pageHeightPx = Math.floor((A4_H / ratio) * 2); // px per A4 page at scale:2
+
+      let pageIndex = 0;
+      let remainingH = imgH;
+
+      while(remainingH > 0){
+        const sliceH = Math.min(pageHeightPx, remainingH);
+        const offsetY = pageIndex * pageHeightPx;
+
+        // Create a slice canvas
+        const sliceCanvas = document.createElement('canvas');
+        sliceCanvas.width  = imgW;
+        sliceCanvas.height = sliceH;
+        const ctx = sliceCanvas.getContext('2d');
+        ctx.drawImage(canvas, 0, -offsetY);
+
+        const imgData = sliceCanvas.toDataURL('image/jpeg', 0.95);
+        const sliceMMH = (sliceH / 2) * ratio;
+
+        if(pageIndex > 0) pdf.addPage();
+        pdf.addImage(imgData,'JPEG', 0, 0, A4_W, sliceMMH, '', 'FAST');
+
+        remainingH -= sliceH;
+        pageIndex++;
+      }
+
+      pdf.save('Albert_Escrichs_CV_2026.pdf');
+
+    } catch(err){
+      console.error('PDF error:', err);
+      alert('No se pudo generar el PDF. Por favor usa Ctrl+P / Cmd+P como alternativa.');
+    }
+
+    $('#pdfOverlay').removeClass('active');
+  }
+
+  $('#downloadPdf, #downloadPdfMobile').on('click', generatePDF);
 
 });
 </script>
