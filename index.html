@@ -181,15 +181,6 @@ body{
   transform:scale(1.05);transition:transform 1.5s ease-out;
 }
 .hero-profile-image.loaded{transform:scale(1);}
-.hero-badge{
-  position:absolute;bottom:24px;left:-20px;
-  background:var(--white);border:1px solid var(--border);
-  border-radius:10px;padding:12px 18px;
-  box-shadow:0 4px 24px rgba(0,0,0,.10);
-  font-size:11px;color:var(--mid);z-index:10;
-  opacity:0;transform:translateX(-12px);
-}
-.hero-badge strong{display:block;font-size:20px;font-weight:900;color:var(--pink);line-height:1;}
 
 /* ─── STATS ──────────────────────── */
 .stats-bar{
@@ -366,15 +357,15 @@ h4.edu-degree{font-size:11px;font-weight:700;color:var(--dark);line-height:1.4;m
 .contact-right .nav-logo {
   display:inline-flex;
   color:var(--white);
-  font-size:15px; /* Un pelín más grande para el cierre */
-  opacity:0.6; /* Añade sutileza simulando la "marca de agua" anterior */
+  font-size:15px;
+  opacity:0.6;
   transition:opacity .3s ease;
 }
 .contact-right .nav-logo:hover {
   opacity:1;
 }
 .contact-right .nav-logo .logo-e {
-  color:var(--white); /* Forzamos la E a blanco también */
+  color:var(--white);
 }
 .contact-copy{font-size:10px;color:rgba(255,255,255,.25);margin-top:8px;}
 
@@ -428,7 +419,6 @@ h4.edu-degree{font-size:11px;font-weight:700;color:var(--dark);line-height:1.4;m
   .hero{grid-template-columns:1fr;min-height:auto;}
   .hero-right{min-height:320px;order:-1;}
   .hero-left{padding:36px 32px 32px;}
-  .hero-badge{bottom:16px;left:16px;}
   .stats-bar{grid-template-columns:repeat(2,1fr);}
   .stat-item:nth-child(2){border-right:none;}
   .stat-item:nth-child(3){border-top:1px solid var(--border);}
@@ -457,8 +447,6 @@ h4.edu-degree{font-size:11px;font-weight:700;color:var(--dark);line-height:1.4;m
   .hero-left{padding:28px 20px 24px;}
   .hero-name{letter-spacing:-2px;}
   .hero-summary{font-size:12px;}
-  .hero-badge{padding:10px 14px;left:12px;bottom:12px;}
-  .hero-badge strong{font-size:17px;}
   .hero-contact-bar{gap:12px;}
   .stats-bar{grid-template-columns:1fr 1fr;}
   .stat-item{padding:16px;}
@@ -535,7 +523,7 @@ h4.edu-degree{font-size:11px;font-weight:700;color:var(--dark);line-height:1.4;m
           <span class="line">ESCRICHS</span>
         </h1>
         <div class="hero-roles" id="heroRoles">
-          <span class="pill pill-pink">
+          <span class="pill">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 17H7A5 5 0 0 1 7 7h2M15 7h2a5 5 0 0 1 0 10h-2M11 12h2"/></svg>
             Digital Project Manager
           </span>
@@ -560,7 +548,6 @@ h4.edu-degree{font-size:11px;font-weight:700;color:var(--dark);line-height:1.4;m
     </div>
     <div class="hero-right">
       <img src="images/Albert_Escrichs.webp" alt="Albert Escrichs" class="hero-profile-image" id="heroImg">
-      <div class="hero-badge" id="heroBadge"><strong>15+</strong>Años de experiencia</div>
     </div>
   </section>
 
@@ -731,8 +718,7 @@ $(function(){
     .to('.hero-name .line',    {y:'0%',duration:1,stagger:.15,ease:'power3.out'},'<.1')
     .to('#heroRoles',          {opacity:1,duration:.7},'<.4')
     .to('#heroSummary',        {opacity:1,y:0,duration:.8},'<.15')
-    .to('#heroContact',        {opacity:1,duration:.7},'<.2')
-    .to('#heroBadge',          {opacity:1,x:0,duration:.8,ease:'back.out(1.2)'},'<.2');
+    .to('#heroContact',        {opacity:1,duration:.7},'<.2');
 
   $('#heroImg').on('load',function(){$(this).addClass('loaded');}).each(function(){
     if(this.complete) $(this).addClass('loaded');
