@@ -360,12 +360,23 @@ h4.edu-degree{font-size:11px;font-weight:700;color:var(--dark);line-height:1.4;m
 .contact-item-val{font-size:12px;font-weight:600;color:var(--white);}
 .contact-item-val a{color:var(--white);text-decoration:none;transition:color .2s;}
 .contact-item-val a:hover{color:var(--pink);}
-.contact-right{text-align:right;}
-.contact-logo-e{font-size:52px;font-weight:900;color:rgba(255,255,255,.06);letter-spacing:-4px;line-height:1;}
-.contact-logo-name{font-size:9px;font-weight:700;letter-spacing:5px;color:rgba(255,255,255,.2);}
-.contact-copy{font-size:10px;color:rgba(255,255,255,.25);margin-top:16px;}
 
-.nav-logo{color:#0d0d0d;}
+/* Adaptación del logo de navegación para la sección oscura del footer */
+.contact-right{text-align:right;}
+.contact-right .nav-logo {
+  display:inline-flex;
+  color:var(--white);
+  font-size:15px; /* Un pelín más grande para el cierre */
+  opacity:0.6; /* Añade sutileza simulando la "marca de agua" anterior */
+  transition:opacity .3s ease;
+}
+.contact-right .nav-logo:hover {
+  opacity:1;
+}
+.contact-right .nav-logo .logo-e {
+  color:var(--white); /* Forzamos la E a blanco también */
+}
+.contact-copy{font-size:10px;color:rgba(255,255,255,.25);margin-top:8px;}
 
 /* ─── SCROLL TO TOP ──────────────── */
 .scroll-top{
@@ -702,8 +713,7 @@ h4.edu-degree{font-size:11px;font-weight:700;color:var(--dark);line-height:1.4;m
         <div class="contact-item"><div class="contact-item-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div><div><div class="contact-item-label">Ubicación</div><div class="contact-item-val">C/ Neptuno nº6 · 18004, Granada</div></div></div>
       </div>
       <div class="contact-right">
-        <div class="contact-logo-e" style="color:rgba(255,255,255,.06);">Ǝ</div>
-        <div class="contact-logo-name" style="color:rgba(255,255,255,.18);font-size:9px;font-weight:700;letter-spacing:5px;">ESCRICHS</div>
+        <a href="#" class="nav-logo"><span class="logo-e">Ǝ</span>&nbsp;ESCRICHS</a>
         <div class="contact-copy">© 2026 · Albert Escrichs · Todos los derechos reservados</div>
       </div>
     </div>
