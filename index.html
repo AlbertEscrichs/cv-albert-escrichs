@@ -5,12 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Albert Escrichs — CV</title>
 
-<!-- GSAP + ScrollTrigger -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-<!-- jQuery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-<!-- html2canvas + jsPDF -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
@@ -33,26 +30,6 @@ body{
   -webkit-font-smoothing:antialiased;
   overflow-x:hidden;
 }
-
-/* ─── CURSOR ─────────────────────── */
-.cursor{
-  width:10px;height:10px;border-radius:50%;
-  background:var(--pink);position:fixed;
-  pointer-events:none;z-index:9999;
-  transform:translate(-50%,-50%);
-  transition:width .2s,height .2s,opacity .2s;
-  mix-blend-mode:multiply;
-}
-.cursor-ring{
-  width:36px;height:36px;border-radius:50%;
-  border:1.5px solid var(--pink);position:fixed;
-  pointer-events:none;z-index:9998;
-  transform:translate(-50%,-50%);
-  opacity:.5;transition:width .3s,height .3s,opacity .3s;
-}
-.cursor.hover{width:20px;height:20px;}
-.cursor-ring.hover{width:56px;height:56px;opacity:.2;}
-@media(hover:none){.cursor,.cursor-ring{display:none;}}
 
 /* ─── NAV ────────────────────────── */
 .nav{
@@ -77,19 +54,21 @@ body{
   text-decoration:none;
 }
 .nav-logo .logo-e{color:var(--dark);}
-.nav-links{display:flex;align-items:center;gap:28px;}
+
+/* Estilo Pill para Navegación */
+.nav-links{display:flex;align-items:center;gap:8px;}
 .nav-links a{
-  font-size:11px;font-weight:600;color:var(--gray);
-  text-decoration:none;transition:color .2s;position:relative;
+  font-size:11.5px;font-weight:600;color:var(--gray);
+  text-decoration:none;padding:6px 14px;border-radius:100px;
+  transition:color .3s ease, background-color .3s ease, transform .2s ease;
 }
-.nav-links a::after{
-  content:'';position:absolute;bottom:-2px;left:0;right:0;
-  height:1.5px;background:var(--pink);
-  transform:scaleX(0);transform-origin:left;transition:transform .25s;
+.nav-links a:hover{
+  color:var(--dark);background-color:var(--bg);transform:translateY(-1px);
 }
-.nav-links a:hover{color:var(--dark);}
-.nav-links a:hover::after,.nav-links a.active::after{transform:scaleX(1);}
-.nav-links a.active{color:var(--dark);}
+.nav-links a.active{
+  color:var(--pink);background-color:var(--pink-m);
+}
+
 .nav-btn{
   background:var(--pink);color:#fff;border:none;
   padding:8px 20px;font-family:inherit;font-weight:700;
@@ -158,7 +137,7 @@ body{
   display:flex;align-items:center;gap:10px;
   font-size:11px;font-weight:600;letter-spacing:2px;
   text-transform:uppercase;color:var(--pink);margin-bottom:20px;
-  opacity:0;transform:translateX(-20px);
+  opacity:0;transform:translateX(-12px);
 }
 .hero-eyebrow span{display:inline-block;width:28px;height:1.5px;background:var(--pink);}
 .hero-name{
@@ -181,7 +160,7 @@ body{
 .hero-summary{
   margin-top:28px;font-size:13px;color:var(--mid);line-height:1.8;
   max-width:480px;border-left:2px solid var(--pink);padding-left:16px;
-  opacity:0;transform:translateY(16px);
+  opacity:0;transform:translateY(12px);
 }
 .hero-summary strong{color:var(--dark);}
 .hero-contact-bar{
@@ -199,7 +178,7 @@ body{
 .hero-profile-image{
   width:100%;height:100%;object-fit:cover;
   object-position:top center;display:block;
-  transform:scale(1.08);transition:transform 1.2s ease;
+  transform:scale(1.05);transition:transform 1.5s ease-out;
 }
 .hero-profile-image.loaded{transform:scale(1);}
 .hero-badge{
@@ -208,7 +187,7 @@ body{
   border-radius:10px;padding:12px 18px;
   box-shadow:0 4px 24px rgba(0,0,0,.10);
   font-size:11px;color:var(--mid);z-index:10;
-  opacity:0;transform:translateX(-16px);
+  opacity:0;transform:translateX(-12px);
 }
 .hero-badge strong{display:block;font-size:20px;font-weight:900;color:var(--pink);line-height:1;}
 
@@ -219,7 +198,7 @@ body{
 }
 .stat-item{
   padding:24px 32px;border-right:1px solid var(--border);
-  cursor:default;transition:background .25s;
+  cursor:default;transition:background .3s ease;
 }
 .stat-item:last-child{border-right:none;}
 .stat-item:hover{background:var(--pink-m);}
@@ -247,8 +226,8 @@ h2.section-title{font-size:28px;font-weight:900;letter-spacing:-1px;color:var(--
 .spec-card{
   border:1.5px solid var(--border);border-radius:12px;
   padding:24px 22px;position:relative;overflow:hidden;
-  transition:border-color .25s,box-shadow .25s,transform .25s;
-  opacity:0;transform:translateY(32px);
+  transition:border-color .3s,box-shadow .3s,transform .3s;
+  opacity:0;transform:translateY(20px);
 }
 .spec-card:hover{
   border-color:var(--pink);
@@ -257,7 +236,7 @@ h2.section-title{font-size:28px;font-weight:900;letter-spacing:-1px;color:var(--
 }
 .spec-card::after{
   content:'';position:absolute;bottom:0;left:0;right:0;height:3px;
-  background:var(--pink);transform:scaleX(0);transform-origin:left;transition:transform .35s;
+  background:var(--pink);transform:scaleX(0);transform-origin:left;transition:transform .35s ease;
 }
 .spec-card:hover::after{transform:scaleX(1);}
 .spec-icon{
@@ -282,8 +261,8 @@ h3.spec-title{font-size:15px;font-weight:800;color:var(--dark);letter-spacing:-.
 .exp-row{
   display:grid;grid-template-columns:220px 1fr 140px;
   gap:24px;padding:24px 0;border-bottom:1px solid var(--border);align-items:start;
-  opacity:0;transform:translateX(-24px);
-  transition:background .2s;
+  opacity:0;transform:translateX(-16px);
+  transition:background .3s;
 }
 .exp-row:last-child{border-bottom:none;}
 .exp-row:hover{background:rgba(250,250,250,.8);}
@@ -308,8 +287,8 @@ h4.exp-role{font-size:12px;font-weight:700;color:var(--pink);margin-bottom:6px;}
   background:var(--bg);border:1px solid var(--border);
   border-radius:10px;padding:16px 18px;
   display:flex;gap:12px;align-items:flex-start;
-  opacity:0;transform:translateY(24px);
-  transition:transform .25s,box-shadow .25s,border-color .25s;
+  opacity:0;transform:translateY(16px);
+  transition:transform .3s,box-shadow .3s,border-color .3s;
 }
 .skill-card:hover{transform:translateY(-3px);box-shadow:0 6px 20px rgba(0,0,0,.07);border-color:var(--pink);}
 .skill-icon{
@@ -367,13 +346,13 @@ h4.edu-degree{font-size:11px;font-weight:700;color:var(--dark);line-height:1.4;m
 .contact-items{display:flex;flex-direction:column;gap:16px;}
 .contact-item{
   display:flex;align-items:center;gap:14px;
-  opacity:0;transform:translateX(-20px);
+  opacity:0;transform:translateX(-16px);
 }
 .contact-item-icon{
   width:44px;height:44px;flex-shrink:0;
   border:1px solid rgba(255,255,255,.12);border-radius:10px;
   display:flex;align-items:center;justify-content:center;
-  transition:background .25s,border-color .25s;
+  transition:background .3s,border-color .3s;
 }
 .contact-item:hover .contact-item-icon{background:rgba(224,0,127,.15);border-color:rgba(224,0,127,.4);}
 .contact-item-icon svg{width:18px;height:18px;color:var(--pink);}
@@ -381,13 +360,11 @@ h4.edu-degree{font-size:11px;font-weight:700;color:var(--dark);line-height:1.4;m
 .contact-item-val{font-size:12px;font-weight:600;color:var(--white);}
 .contact-item-val a{color:var(--white);text-decoration:none;transition:color .2s;}
 .contact-item-val a:hover{color:var(--pink);}
-/* Logo monocromo — versión negativa (sobre fondo oscuro) = blanco */
 .contact-right{text-align:right;}
 .contact-logo-e{font-size:52px;font-weight:900;color:rgba(255,255,255,.06);letter-spacing:-4px;line-height:1;}
 .contact-logo-name{font-size:9px;font-weight:700;letter-spacing:5px;color:rgba(255,255,255,.2);}
 .contact-copy{font-size:10px;color:rgba(255,255,255,.25);margin-top:16px;}
 
-/* Logo nav — versión positiva (sobre fondo claro) = #0d0d0d */
 .nav-logo{color:#0d0d0d;}
 
 /* ─── SCROLL TO TOP ──────────────── */
@@ -405,7 +382,7 @@ h4.edu-degree{font-size:11px;font-weight:700;color:var(--dark);line-height:1.4;m
 .scroll-top svg{width:18px;height:18px;}
 
 /* ─── REVEAL UTILITY ─────────────── */
-.reveal{opacity:0;transform:translateY(28px);}
+.reveal{opacity:0;transform:translateY(20px);}
 
   /* ─── PDF OVERLAY ────────────────── */
 .pdf-overlay{
@@ -424,17 +401,9 @@ h4.edu-degree{font-size:11px;font-weight:700;color:var(--dark);line-height:1.4;m
 .pdf-msg{color:#fff;font-size:13px;font-weight:600;letter-spacing:.3px;}
 .pdf-sub{color:rgba(255,255,255,.4);font-size:11px;}
 
-/* ─── PDF SNAPSHOT (hidden clone) ── */
-#pdfSnapshot{
-  position:fixed;left:-9999px;top:0;
-  width:1100px;background:#fff;
-  font-family:'Inter',sans-serif;
-  -webkit-font-smoothing:antialiased;
-}
-
 /* ─── PRINT ──────────────────────── */
 @media print{
-  .nav,.cursor,.cursor-ring,.progress-bar,.scroll-top{display:none!important;}
+  .nav,.progress-bar,.scroll-top{display:none!important;}
   .page{box-shadow:none!important;margin:0!important;max-width:100%!important;border-radius:0!important;}
   *{opacity:1!important;transform:none!important;}
 }
@@ -504,21 +473,14 @@ h4.edu-degree{font-size:11px;font-weight:700;color:var(--dark);line-height:1.4;m
 </head>
 <body>
 
-<!-- Custom cursor -->
-<div class="cursor" id="cursor"></div>
-<div class="cursor-ring" id="cursorRing"></div>
-
-<!-- Progress bar -->
 <div class="progress-bar" id="progressBar"></div>
 
-<!-- PDF Overlay -->
 <div class="pdf-overlay" id="pdfOverlay">
   <div class="pdf-spinner"></div>
   <div class="pdf-msg">Generando PDF…</div>
   <div class="pdf-sub">Esto puede tardar unos segundos</div>
 </div>
 
-<!-- NAV -->
 <nav class="nav" id="mainNav">
   <a href="#" class="nav-logo"><span class="logo-e">Ǝ</span>&nbsp;ESCRICHS</a>
   <div class="nav-links">
@@ -534,7 +496,6 @@ h4.edu-degree{font-size:11px;font-weight:700;color:var(--dark);line-height:1.4;m
   </button>
 </nav>
 
-<!-- Mobile nav -->
 <div class="mobile-nav" id="mobileNav">
   <button class="close-btn" id="closeNav">✕</button>
   <a href="#especializacion">Especialización</a>
@@ -546,15 +507,12 @@ h4.edu-degree{font-size:11px;font-weight:700;color:var(--dark);line-height:1.4;m
 </div>
 <div class="nav-overlay" id="navOverlay"></div>
 
-<!-- Scroll to top -->
 <button class="scroll-top" id="scrollTop" aria-label="Volver arriba">
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="18 15 12 9 6 15"/></svg>
 </button>
 
-<!-- PAGE -->
 <div class="page">
 
-  <!-- HERO -->
   <section class="hero" id="hero">
     <div class="hero-left">
       <div>
@@ -595,7 +553,6 @@ h4.edu-degree{font-size:11px;font-weight:700;color:var(--dark);line-height:1.4;m
     </div>
   </section>
 
-  <!-- STATS -->
   <div class="stats-bar">
     <div class="stat-item reveal"><div class="stat-num" data-count="15">0<span>+</span></div><div class="stat-label">Años de experiencia</div></div>
     <div class="stat-item reveal"><div class="stat-num" data-count="6">0<span>+</span></div><div class="stat-label">Empresas &amp; proyectos clave</div></div>
@@ -603,7 +560,6 @@ h4.edu-degree{font-size:11px;font-weight:700;color:var(--dark);line-height:1.4;m
     <div class="stat-item reveal"><div class="stat-num" data-count="2">0<span>★</span></div><div class="stat-label">Idiomas nativos</div></div>
   </div>
 
-  <!-- ESPECIALIZACIÓN -->
   <section class="section" id="especializacion">
     <div class="section-header reveal">
       <div>
@@ -636,7 +592,6 @@ h4.edu-degree{font-size:11px;font-weight:700;color:var(--dark);line-height:1.4;m
     </div>
   </section>
 
-  <!-- EXPERIENCIA -->
   <section class="section" id="experiencia">
     <div class="section-header reveal">
       <div>
@@ -678,7 +633,6 @@ h4.edu-degree{font-size:11px;font-weight:700;color:var(--dark);line-height:1.4;m
     </div>
   </section>
 
-  <!-- SKILLS -->
   <section class="section" id="skills">
     <div class="section-header reveal">
       <div>
@@ -696,7 +650,6 @@ h4.edu-degree{font-size:11px;font-weight:700;color:var(--dark);line-height:1.4;m
     </div>
   </section>
 
-  <!-- FORMACIÓN -->
   <section class="section" id="formacion">
     <div class="section-header reveal">
       <div>
@@ -735,8 +688,6 @@ h4.edu-degree{font-size:11px;font-weight:700;color:var(--dark);line-height:1.4;m
     </div>
   </section>
 
-  <!-- CONTACT -->
-  <!-- Logo en versión negativa = blanco sobre fondo oscuro #0d0d0d -->
   <section class="contact-section" id="contacto">
     <div class="contact-label">Contacto</div>
     <div class="contact-headline">
@@ -751,7 +702,6 @@ h4.edu-degree{font-size:11px;font-weight:700;color:var(--dark);line-height:1.4;m
         <div class="contact-item"><div class="contact-item-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div><div><div class="contact-item-label">Ubicación</div><div class="contact-item-val">C/ Neptuno nº6 · 18004, Granada</div></div></div>
       </div>
       <div class="contact-right">
-        <!-- Logo versión negativa: monocromo blanco -->
         <div class="contact-logo-e" style="color:rgba(255,255,255,.06);">Ǝ</div>
         <div class="contact-logo-name" style="color:rgba(255,255,255,.18);font-size:9px;font-weight:700;letter-spacing:5px;">ESCRICHS</div>
         <div class="contact-copy">© 2026 · Albert Escrichs · Todos los derechos reservados</div>
@@ -759,22 +709,20 @@ h4.edu-degree{font-size:11px;font-weight:700;color:var(--dark);line-height:1.4;m
     </div>
   </section>
 
-</div><!-- /page -->
-
-<script>
+</div><script>
 $(function(){
 
   /* ── GSAP + ScrollTrigger ── */
   gsap.registerPlugin(ScrollTrigger);
 
   /* ── HERO ENTRANCE ── */
-  const tl = gsap.timeline({defaults:{ease:'power3.out'}});
-  tl.to('#heroEyebrow',        {opacity:1,x:0,duration:.7,delay:.2})
-    .to('.hero-name .line',    {y:'0%',duration:.9,stagger:.12,ease:'power4.out'},'<.1')
-    .to('#heroRoles',          {opacity:1,duration:.6},'<.4')
-    .to('#heroSummary',        {opacity:1,y:0,duration:.7},'<.15')
-    .to('#heroContact',        {opacity:1,duration:.6},'<.2')
-    .to('#heroBadge',          {opacity:1,x:0,duration:.7,ease:'back.out(1.5)'},'<.2');
+  const tl = gsap.timeline({defaults:{ease:'power2.out'}});
+  tl.to('#heroEyebrow',        {opacity:1,x:0,duration:.8,delay:.2})
+    .to('.hero-name .line',    {y:'0%',duration:1,stagger:.15,ease:'power3.out'},'<.1')
+    .to('#heroRoles',          {opacity:1,duration:.7},'<.4')
+    .to('#heroSummary',        {opacity:1,y:0,duration:.8},'<.15')
+    .to('#heroContact',        {opacity:1,duration:.7},'<.2')
+    .to('#heroBadge',          {opacity:1,x:0,duration:.8,ease:'back.out(1.2)'},'<.2');
 
   $('#heroImg').on('load',function(){$(this).addClass('loaded');}).each(function(){
     if(this.complete) $(this).addClass('loaded');
@@ -784,33 +732,33 @@ $(function(){
   ScrollTrigger.create({
     trigger:'.contact-section',start:'top 75%',
     onEnter:()=>{
-      gsap.to('.ch-line',{y:'0%',duration:.9,stagger:.1,ease:'power4.out'});
-      gsap.to('.contact-item',{opacity:1,x:0,duration:.6,stagger:.12,delay:.3,ease:'power3.out'});
+      gsap.to('.ch-line',{y:'0%',duration:1,stagger:.15,ease:'power3.out'});
+      gsap.to('.contact-item',{opacity:1,x:0,duration:.8,stagger:.15,delay:.3,ease:'power2.out'});
     }
   });
 
   /* ── GENERIC REVEAL ── */
   gsap.utils.toArray('.reveal').forEach(el=>{
-    gsap.fromTo(el,{opacity:0,y:28},{opacity:1,y:0,duration:.7,ease:'power3.out',
+    gsap.fromTo(el,{opacity:0,y:20},{opacity:1,y:0,duration:.8,ease:'power2.out',
       scrollTrigger:{trigger:el,start:'top 85%',toggleActions:'play none none none'}});
   });
 
   /* ── SPEC CARDS ── */
   gsap.utils.toArray('.spec-card').forEach((card,i)=>{
-    gsap.to(card,{opacity:1,y:0,duration:.7,ease:'power3.out',
-      scrollTrigger:{trigger:card,start:'top 88%'},delay:i*.1});
+    gsap.to(card,{opacity:1,y:0,duration:.8,ease:'power2.out',
+      scrollTrigger:{trigger:card,start:'top 88%'},delay:i*.15});
   });
 
   /* ── EXP ROWS ── */
   gsap.utils.toArray('.exp-row').forEach((row,i)=>{
-    gsap.to(row,{opacity:1,x:0,duration:.65,ease:'power3.out',
-      scrollTrigger:{trigger:row,start:'top 88%'},delay:i*.08});
+    gsap.to(row,{opacity:1,x:0,duration:.8,ease:'power2.out',
+      scrollTrigger:{trigger:row,start:'top 88%'},delay:i*.1});
   });
 
   /* ── SKILL CARDS ── */
   gsap.utils.toArray('.skill-card').forEach((card,i)=>{
-    gsap.to(card,{opacity:1,y:0,duration:.6,ease:'power3.out',
-      scrollTrigger:{trigger:card,start:'top 90%'},delay:i*.07});
+    gsap.to(card,{opacity:1,y:0,duration:.8,ease:'power2.out',
+      scrollTrigger:{trigger:card,start:'top 90%'},delay:i*.1});
   });
 
   /* ── COUNTER ── */
@@ -856,29 +804,15 @@ $(function(){
     if(t.length){e.preventDefault();$('html,body').animate({scrollTop:t.offset().top-64},700,'swing');}
   });
 
-  /* ── CUSTOM CURSOR ── */
-  $(document).on('mousemove',function(e){
-    gsap.to('#cursor',{x:e.clientX,y:e.clientY,duration:.1});
-    gsap.to('#cursorRing',{x:e.clientX,y:e.clientY,duration:.35});
-  });
-  $('a,button,.pill,.spec-card,.skill-card,.stat-item,.tag').on('mouseenter',function(){
-    $('#cursor,#cursorRing').addClass('hover');
-  }).on('mouseleave',function(){$('#cursor,#cursorRing').removeClass('hover');});
-
   /* ════════════════════════════════════
      PDF GENERATION — jsPDF + html2canvas
   ════════════════════════════════════ */
   async function generatePDF(){
     const {jsPDF} = window.jspdf;
-
-    // Show overlay
     $('#pdfOverlay').addClass('active');
 
     try {
-      // Build a clean snapshot element — all animations reset, no nav
       const source = document.querySelector('.page');
-
-      // Temporarily force all animated elements visible & reset transforms
       const animated = source.querySelectorAll('*');
       const savedStyles = [];
       animated.forEach(el=>{
@@ -887,7 +821,6 @@ $(function(){
         el.style.transform='none';
       });
 
-      // Capture at 2× for retina sharpness, A4 width = 794px at 96dpi
       const canvas = await html2canvas(source,{
         scale: 2,
         useCORS: true,
@@ -898,36 +831,29 @@ $(function(){
         windowWidth: 1100,
         logging: false,
         onclone: (clonedDoc) => {
-          // On the clone: make everything fully visible
           clonedDoc.querySelectorAll('*').forEach(el=>{
             el.style.opacity='1';
             el.style.transform='none';
             el.style.transition='none';
             el.style.animation='none';
           });
-          // Hide cursor & progress bar from clone
-          ['#cursor','#cursorRing','#progressBar','#scrollTop','#pdfOverlay']
+          ['#progressBar','#scrollTop','#pdfOverlay']
             .forEach(sel=>{ const n=clonedDoc.querySelector(sel); if(n) n.style.display='none'; });
         }
       });
 
-      // Restore original styles
       savedStyles.forEach(({el,opacity,transform})=>{
         el.style.opacity=opacity;
         el.style.transform=transform;
       });
 
-      // A4 dimensions in mm
       const A4_W = 210, A4_H = 297;
       const imgW  = canvas.width, imgH = canvas.height;
-
-      // Scale so page width = A4 width
-      const ratio   = A4_W / (imgW / 2); // /2 because scale:2
+      const ratio   = A4_W / (imgW / 2);
       const totalMM = (imgH / 2) * ratio;
 
-      // Multi-page: slice canvas into A4 chunks
       const pdf = new jsPDF({orientation:'portrait',unit:'mm',format:'a4',compress:true});
-      const pageHeightPx = Math.floor((A4_H / ratio) * 2); // px per A4 page at scale:2
+      const pageHeightPx = Math.floor((A4_H / ratio) * 2);
 
       let pageIndex = 0;
       let remainingH = imgH;
@@ -936,7 +862,6 @@ $(function(){
         const sliceH = Math.min(pageHeightPx, remainingH);
         const offsetY = pageIndex * pageHeightPx;
 
-        // Create a slice canvas
         const sliceCanvas = document.createElement('canvas');
         sliceCanvas.width  = imgW;
         sliceCanvas.height = sliceH;
