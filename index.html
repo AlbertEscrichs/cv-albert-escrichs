@@ -55,7 +55,6 @@ body{
 }
 .nav-logo .logo-e{color:var(--dark);}
 
-/* Estilo Pill para Navegación */
 .nav-links{display:flex;align-items:center;gap:8px;}
 .nav-links a{
   font-size:11.5px;font-weight:600;color:var(--gray);
@@ -249,14 +248,23 @@ h3.spec-title{font-size:15px;font-weight:800;color:var(--dark);letter-spacing:-.
 
 /* ─── EXPERIENCE ─────────────────── */
 .exp-list{display:flex;flex-direction:column;gap:0;}
+
+/* exp-row ahora es flex-column para alojar el panel de portfolio */
 .exp-row{
-  display:grid;grid-template-columns:220px 1fr 140px;
-  gap:24px;padding:24px 0;border-bottom:1px solid var(--border);align-items:start;
+  display:flex;flex-direction:column;
+  padding:24px 0;border-bottom:1px solid var(--border);
   opacity:0;transform:translateX(-16px);
   transition:background .3s;
 }
 .exp-row:last-child{border-bottom:none;}
 .exp-row:hover{background:rgba(250,250,250,.8);}
+
+/* inner header — mantiene el grid de 3 columnas original */
+.exp-header{
+  display:grid;grid-template-columns:220px 1fr 140px;
+  gap:24px;align-items:start;
+}
+
 h3.exp-co{font-size:14px;font-weight:800;color:var(--dark);letter-spacing:-.3px;margin-bottom:3px;}
 .exp-loc{font-size:10.5px;color:var(--gray);display:flex;align-items:center;gap:4px;}
 .exp-loc svg{width:11px;height:11px;}
@@ -271,6 +279,119 @@ h4.exp-role{font-size:12px;font-weight:700;color:var(--pink);margin-bottom:6px;}
 .exp-date-badge svg{width:11px;height:11px;color:var(--gray);}
 .exp-current{border-color:var(--pink);color:var(--pink);background:var(--pink-light);}
 .exp-current svg{color:var(--pink);}
+
+/* ── PORTFOLIO TOGGLE ── */
+.exp-portfolio-toggle{
+  display:inline-flex;align-items:center;gap:6px;
+  margin-top:12px;padding:5px 12px 5px 8px;
+  font-size:10px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;
+  color:var(--gray);background:var(--bg);
+  border:1px solid var(--border);border-radius:100px;
+  cursor:pointer;font-family:inherit;
+  transition:color .2s,border-color .2s,background .2s;
+}
+.exp-portfolio-toggle:hover{color:var(--pink);border-color:var(--pink);background:var(--pink-light);}
+.exp-portfolio-toggle.open{color:var(--pink);border-color:var(--pink);background:var(--pink-light);}
+.exp-portfolio-toggle svg{width:12px;height:12px;transition:transform .3s ease;}
+.exp-portfolio-toggle.open svg{transform:rotate(180deg);}
+
+/* ── PORTFOLIO PANEL ── */
+.exp-portfolio{
+  max-height:0;overflow:hidden;opacity:0;
+  transition:max-height .5s cubic-bezier(.4,0,.2,1),opacity .3s ease;
+}
+.exp-portfolio.open{opacity:1;}
+.exp-portfolio-inner{
+  padding-top:20px;
+  display:grid;grid-template-columns:repeat(3,1fr);gap:14px;
+}
+.exp-portfolio-inner.cols-2{grid-template-columns:repeat(2,1fr);}
+
+/* ── PORTFOLIO CARD ── */
+.pf-card{
+  border:1.5px solid var(--border);border-radius:10px;
+  overflow:hidden;background:var(--white);
+  cursor:pointer;
+  transition:border-color .25s,box-shadow .25s,transform .25s;
+}
+.pf-card:hover{
+  border-color:var(--pink);
+  box-shadow:0 6px 24px rgba(224,0,127,.10);
+  transform:translateY(-3px);
+}
+.pf-img{
+  height:140px;
+  background:linear-gradient(135deg,#f0f0f0 0%,#e4e4e4 100%);
+  position:relative;overflow:hidden;
+  display:flex;align-items:center;justify-content:center;
+}
+.pf-img img{width:100%;height:100%;object-fit:cover;display:block;}
+.pf-img-ph{display:flex;flex-direction:column;align-items:center;gap:6px;color:#c8c8c8;font-size:9px;}
+.pf-img-ph svg{width:28px;height:28px;opacity:.3;}
+.pf-overlay{
+  position:absolute;inset:0;background:var(--pink);
+  opacity:0;display:flex;align-items:center;justify-content:center;
+  transition:opacity .3s;
+}
+.pf-card:hover .pf-overlay{opacity:.88;}
+.pf-overlay-txt{color:#fff;font-size:11px;font-weight:700;display:flex;align-items:center;gap:6px;}
+.pf-overlay-txt svg{width:14px;height:14px;}
+.pf-body{padding:12px 14px;}
+.pf-cat{
+  font-size:8.5px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;
+  color:var(--pink);margin-bottom:4px;
+  display:flex;align-items:center;gap:4px;
+}
+.pf-cat::before{content:'';width:10px;height:1.5px;background:var(--pink);}
+h4.pf-title{font-size:11.5px;font-weight:800;color:var(--dark);margin-bottom:4px;letter-spacing:-.2px;line-height:1.3;}
+.pf-desc{font-size:10px;color:var(--gray);line-height:1.5;margin-bottom:8px;}
+.pf-tags{display:flex;flex-wrap:wrap;gap:3px;}
+.pf-tag{font-size:8.5px;font-weight:500;color:var(--mid);background:var(--bg);border:1px solid var(--border);border-radius:100px;padding:2px 8px;}
+
+/* ── PORTFOLIO MODAL ── */
+.pf-modal-overlay{
+  position:fixed;inset:0;background:rgba(0,0,0,.72);z-index:1000;
+  opacity:0;pointer-events:none;transition:opacity .3s;
+  display:flex;align-items:center;justify-content:center;padding:20px;
+  backdrop-filter:blur(5px);
+}
+.pf-modal-overlay.open{opacity:1;pointer-events:all;}
+.pf-modal{
+  background:var(--white);border-radius:16px;
+  max-width:660px;width:100%;max-height:88vh;overflow-y:auto;
+  transform:scale(.96) translateY(16px);
+  transition:transform .35s cubic-bezier(.175,.885,.32,1.275);
+  position:relative;
+}
+.pf-modal-overlay.open .pf-modal{transform:scale(1) translateY(0);}
+.pf-modal-img{
+  background:linear-gradient(135deg,#f0f0f0,#e0e0e0);
+  height:260px;display:flex;align-items:center;justify-content:center;
+  border-radius:14px 14px 0 0;overflow:hidden;
+}
+.pf-modal-img img{width:100%;height:100%;object-fit:cover;}
+.pf-modal-img svg{width:48px;height:48px;opacity:.15;}
+.pf-modal-body{padding:32px;}
+.pf-modal-cat{
+  font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;
+  color:var(--pink);display:flex;align-items:center;gap:6px;margin-bottom:8px;
+}
+.pf-modal-cat::before{content:'';width:14px;height:1.5px;background:var(--pink);}
+h3.pf-modal-title{font-size:20px;font-weight:900;letter-spacing:-.5px;margin-bottom:10px;color:var(--dark);}
+.pf-modal-desc{font-size:13px;color:var(--mid);line-height:1.8;margin-bottom:18px;}
+.pf-modal-tags{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:20px;}
+.pf-modal-meta{display:flex;gap:20px;border-top:1px solid var(--border);padding-top:16px;font-size:11px;color:var(--gray);}
+.pf-modal-meta span{display:flex;align-items:center;gap:5px;}
+.pf-modal-meta svg{width:11px;height:11px;}
+.pf-modal-close{
+  position:absolute;top:14px;right:14px;
+  width:34px;height:34px;border-radius:50%;
+  background:rgba(0,0,0,.06);border:none;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  color:var(--dark);transition:background .2s,color .2s;
+}
+.pf-modal-close:hover{background:var(--pink);color:#fff;}
+.pf-modal-close svg{width:15px;height:15px;}
 
 /* ─── SKILLS ─────────────────────── */
 .skills-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;}
@@ -352,21 +473,14 @@ h4.edu-degree{font-size:11px;font-weight:700;color:var(--dark);line-height:1.4;m
 .contact-item-val a{color:var(--white);text-decoration:none;transition:color .2s;}
 .contact-item-val a:hover{color:var(--pink);}
 
-/* Adaptación del logo de navegación para la sección oscura del footer */
+/* Logo versión negativa (blanco) en la sección oscura */
 .contact-right{text-align:right;}
-.contact-right .nav-logo {
-  display:inline-flex;
-  color:var(--white);
-  font-size:15px;
-  opacity:0.6;
-  transition:opacity .3s ease;
+.contact-right .nav-logo{
+  display:inline-flex;color:var(--white);
+  font-size:15px;opacity:.6;transition:opacity .3s ease;
 }
-.contact-right .nav-logo:hover {
-  opacity:1;
-}
-.contact-right .nav-logo .logo-e {
-  color:var(--white);
-}
+.contact-right .nav-logo:hover{opacity:1;}
+.contact-right .nav-logo .logo-e{color:var(--white);}
 .contact-copy{font-size:10px;color:rgba(255,255,255,.25);margin-top:8px;}
 
 /* ─── SCROLL TO TOP ──────────────── */
@@ -386,7 +500,7 @@ h4.edu-degree{font-size:11px;font-weight:700;color:var(--dark);line-height:1.4;m
 /* ─── REVEAL UTILITY ─────────────── */
 .reveal{opacity:0;transform:translateY(20px);}
 
-  /* ─── PDF OVERLAY ────────────────── */
+/* ─── PDF OVERLAY ────────────────── */
 .pdf-overlay{
   position:fixed;inset:0;background:rgba(13,13,13,.85);
   z-index:9999;display:none;align-items:center;justify-content:center;
@@ -405,7 +519,7 @@ h4.edu-degree{font-size:11px;font-weight:700;color:var(--dark);line-height:1.4;m
 
 /* ─── PRINT ──────────────────────── */
 @media print{
-  .nav,.progress-bar,.scroll-top{display:none!important;}
+  .nav,.progress-bar,.scroll-top,.exp-portfolio-toggle,.exp-portfolio,.pf-modal-overlay{display:none!important;}
   .page{box-shadow:none!important;margin:0!important;max-width:100%!important;border-radius:0!important;}
   *{opacity:1!important;transform:none!important;}
 }
@@ -427,10 +541,13 @@ h4.edu-degree{font-size:11px;font-weight:700;color:var(--dark);line-height:1.4;m
   .stat-num{font-size:28px;}
   .section{padding:40px 32px;}
   .spec-grid{grid-template-columns:1fr 1fr;}
-  .exp-row{grid-template-columns:1fr 1fr;grid-template-rows:auto auto;gap:12px;}
-  .exp-row>div:last-child{grid-column:1;grid-row:1;}
-  .exp-row>div:first-child{grid-column:1;grid-row:2;}
-  .exp-row>div:nth-child(2){grid-column:2;grid-row:1/3;}
+  /* exp-header responsive */
+  .exp-header{grid-template-columns:1fr 1fr;grid-template-rows:auto auto;gap:12px;}
+  .exp-header>div:last-child{grid-column:1;grid-row:1;}
+  .exp-header>div:first-child{grid-column:1;grid-row:2;}
+  .exp-header>div:nth-child(2){grid-column:2;grid-row:1/3;}
+  .exp-portfolio-inner{grid-template-columns:1fr 1fr;}
+  .exp-portfolio-inner.cols-2{grid-template-columns:1fr 1fr;}
   .skills-grid{grid-template-columns:1fr 1fr;}
   .bottom-grid{grid-template-columns:1fr 1fr;gap:32px;}
   .bottom-grid>div:first-child{grid-column:1/-1;}
@@ -455,11 +572,14 @@ h4.edu-degree{font-size:11px;font-weight:700;color:var(--dark);line-height:1.4;m
   .section{padding:32px 20px;}
   h2.section-title{font-size:22px;}
   .spec-grid{grid-template-columns:1fr;}
-  .exp-row{grid-template-columns:1fr;grid-template-rows:auto auto auto;gap:8px;padding:18px 0;}
-  .exp-row>div:last-child{order:-1;}
-  .exp-row>div:first-child{order:1;}
-  .exp-row>div:nth-child(2){order:2;}
+  /* exp-header mobile */
+  .exp-header{grid-template-columns:1fr;grid-template-rows:auto auto auto;gap:8px;}
+  .exp-row{padding:18px 0;}
+  .exp-header>div:last-child{order:-1;}
+  .exp-header>div:first-child{order:1;}
+  .exp-header>div:nth-child(2){order:2;}
   h3.exp-co{font-size:13px;}
+  .exp-portfolio-inner,.exp-portfolio-inner.cols-2{grid-template-columns:1fr;}
   .skills-grid{grid-template-columns:1fr;}
   .bottom-grid{grid-template-columns:1fr;gap:28px;}
   .bottom-grid>div:first-child{grid-column:auto;}
@@ -478,6 +598,25 @@ h4.edu-degree{font-size:11px;font-weight:700;color:var(--dark);line-height:1.4;m
   <div class="pdf-spinner"></div>
   <div class="pdf-msg">Generando PDF…</div>
   <div class="pdf-sub">Esto puede tardar unos segundos</div>
+</div>
+
+<!-- MODAL PORTFOLIO -->
+<div class="pf-modal-overlay" id="pfModalOv">
+  <div class="pf-modal" id="pfModal">
+    <button class="pf-modal-close" onclick="closePfModal()">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+    <div class="pf-modal-img" id="pfModalImg">
+      <svg viewBox="0 0 24 24" fill="none" stroke="#ccc" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+    </div>
+    <div class="pf-modal-body">
+      <div class="pf-modal-cat" id="pfModalCat"></div>
+      <h3 class="pf-modal-title" id="pfModalTitle"></h3>
+      <p class="pf-modal-desc" id="pfModalDesc"></p>
+      <div class="pf-modal-tags" id="pfModalTags"></div>
+      <div class="pf-modal-meta" id="pfModalMeta"></div>
+    </div>
+  </div>
 </div>
 
 <nav class="nav" id="mainNav">
@@ -512,6 +651,7 @@ h4.edu-degree{font-size:11px;font-weight:700;color:var(--dark);line-height:1.4;m
 
 <div class="page">
 
+  <!-- HERO -->
   <section class="hero" id="hero">
     <div class="hero-left">
       <div>
@@ -551,6 +691,7 @@ h4.edu-degree{font-size:11px;font-weight:700;color:var(--dark);line-height:1.4;m
     </div>
   </section>
 
+  <!-- STATS -->
   <div class="stats-bar">
     <div class="stat-item reveal"><div class="stat-num" data-count="15">0<span>+</span></div><div class="stat-label">Años de experiencia</div></div>
     <div class="stat-item reveal"><div class="stat-num" data-count="6">0<span>+</span></div><div class="stat-label">Empresas &amp; proyectos clave</div></div>
@@ -558,6 +699,7 @@ h4.edu-degree{font-size:11px;font-weight:700;color:var(--dark);line-height:1.4;m
     <div class="stat-item reveal"><div class="stat-num" data-count="2">0<span>★</span></div><div class="stat-label">Idiomas nativos</div></div>
   </div>
 
+  <!-- ESPECIALIZACIÓN -->
   <section class="section" id="especializacion">
     <div class="section-header reveal">
       <div>
@@ -590,6 +732,7 @@ h4.edu-degree{font-size:11px;font-weight:700;color:var(--dark);line-height:1.4;m
     </div>
   </section>
 
+  <!-- EXPERIENCIA CON PORTFOLIO INTEGRADO -->
   <section class="section" id="experiencia">
     <div class="section-header reveal">
       <div>
@@ -598,39 +741,135 @@ h4.edu-degree{font-size:11px;font-weight:700;color:var(--dark);line-height:1.4;m
       </div>
     </div>
     <div class="exp-list">
+
+      <!-- GIUNTI -->
       <div class="exp-row">
-        <div><h3 class="exp-co">Giunti Psychometrics</h3><div class="exp-loc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>Granada</div></div>
-        <div><h4 class="exp-role">Corporate Marketing Senior Specialist</h4><p class="exp-desc">Estrategia global de branding e identidad visual. Campañas corporativas integradas. Coordinación de eventos (ferias, conferencias, lanzamientos). Liderazgo creativo de contenido multimedia. Enlace entre equipos regionales. Gestión de PR y relaciones con medios.</p></div>
-        <div><span class="exp-date-badge exp-current"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>Nov 2024 — May 2026</span></div>
+        <div class="exp-header">
+          <div>
+            <h3 class="exp-co">Giunti Psychometrics</h3>
+            <div class="exp-loc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>Granada</div>
+          </div>
+          <div>
+            <h4 class="exp-role">Corporate Marketing Senior Specialist</h4>
+            <p class="exp-desc">Estrategia global de branding e identidad visual. Campañas corporativas integradas. Coordinación de eventos (ferias, conferencias, lanzamientos). Liderazgo creativo de contenido multimedia. Enlace entre equipos regionales. Gestión de PR y relaciones con medios.</p>
+            <button class="exp-portfolio-toggle" data-target="pf-giunti">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+              Ver destacados del proyecto
+            </button>
+          </div>
+          <div><span class="exp-date-badge exp-current"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>Nov 2024 — May 2026</span></div>
+        </div>
+        <div class="exp-portfolio" id="pf-giunti">
+          <div class="exp-portfolio-inner cols-2">
+            <div class="pf-card" onclick="openPfModal(0)">
+              <div class="pf-img"><div class="pf-img-ph"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg><span>Imagen del proyecto</span></div><div class="pf-overlay"><span class="pf-overlay-txt"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>Ver detalle</span></div></div>
+              <div class="pf-body"><div class="pf-cat">Branding & Marketing</div><h4 class="pf-title">Rebranding Corporativo Internacional</h4><p class="pf-desc">Rediseño de identidad visual para mercados europeos e internacionales.</p><div class="pf-tags"><span class="pf-tag">Brand Identity</span><span class="pf-tag">Estrategia</span><span class="pf-tag">Adobe CC</span></div></div>
+            </div>
+            <div class="pf-card" onclick="openPfModal(1)">
+              <div class="pf-img"><div class="pf-img-ph"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 3l7.07 16.97 2.51-7.39 7.39-2.51L3 3z"/></svg><span>Imagen del proyecto</span></div><div class="pf-overlay"><span class="pf-overlay-txt"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>Ver detalle</span></div></div>
+              <div class="pf-body"><div class="pf-cat">Campaña Integrada</div><h4 class="pf-title">Campaña Corporativa Lanzamiento de Producto</h4><p class="pf-desc">Planificación y ejecución de campaña multi-mercado con producción multimedia.</p><div class="pf-tags"><span class="pf-tag">Campaña</span><span class="pf-tag">PR</span><span class="pf-tag">Eventos</span></div></div>
+            </div>
+          </div>
+        </div>
       </div>
+
+      <!-- EXPERIAN -->
       <div class="exp-row">
-        <div><h3 class="exp-co">Experian</h3><div class="exp-loc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>Granada</div></div>
-        <div><h4 class="exp-role">Senior Marketing Specialist &amp; Graphic Designer</h4><p class="exp-desc">Lanzamientos de productos y campañas integradas. Investigación y análisis de datos. Gestión de contenidos web. Planificación y producción de eventos.</p></div>
-        <div><span class="exp-date-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>2021 — Oct 2024</span></div>
+        <div class="exp-header">
+          <div>
+            <h3 class="exp-co">Experian</h3>
+            <div class="exp-loc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>Granada</div>
+          </div>
+          <div>
+            <h4 class="exp-role">Senior Marketing Specialist &amp; Graphic Designer</h4>
+            <p class="exp-desc">Lanzamientos de productos y campañas integradas. Investigación y análisis de datos. Gestión de contenidos web. Planificación y producción de eventos.</p>
+            <button class="exp-portfolio-toggle" data-target="pf-experian">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+              Ver destacados del proyecto
+            </button>
+          </div>
+          <div><span class="exp-date-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>2021 — Oct 2024</span></div>
+        </div>
+        <div class="exp-portfolio" id="pf-experian">
+          <div class="exp-portfolio-inner">
+            <div class="pf-card" onclick="openPfModal(2)">
+              <div class="pf-img"><div class="pf-img-ph"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg><span>Imagen del proyecto</span></div><div class="pf-overlay"><span class="pf-overlay-txt"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>Ver detalle</span></div></div>
+              <div class="pf-body"><div class="pf-cat">Branding & Marketing</div><h4 class="pf-title">Identidad Corporativa EMEA</h4><p class="pf-desc">Sistema de design tokens y guía de marca para 8 mercados europeos.</p><div class="pf-tags"><span class="pf-tag">Brand Identity</span><span class="pf-tag">Design System</span><span class="pf-tag">EMEA</span></div></div>
+            </div>
+            <div class="pf-card" onclick="openPfModal(3)">
+              <div class="pf-img"><div class="pf-img-ph"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="5 3 19 12 5 21 5 3"/></svg><span>Imagen del proyecto</span></div><div class="pf-overlay"><span class="pf-overlay-txt"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>Ver detalle</span></div></div>
+              <div class="pf-body"><div class="pf-cat">Motion & Campaña</div><h4 class="pf-title">Campaña Motion Graphics Europa</h4><p class="pf-desc">Piezas animadas para campaña de producto en mercados europeos.</p><div class="pf-tags"><span class="pf-tag">After Effects</span><span class="pf-tag">Motion</span><span class="pf-tag">Social</span></div></div>
+            </div>
+            <div class="pf-card" onclick="openPfModal(4)">
+              <div class="pf-img"><div class="pf-img-ph"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 3l7.07 16.97 2.51-7.39 7.39-2.51L3 3z"/></svg><span>Imagen del proyecto</span></div><div class="pf-overlay"><span class="pf-overlay-txt"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>Ver detalle</span></div></div>
+              <div class="pf-body"><div class="pf-cat">Evento Corporativo</div><h4 class="pf-title">Producción Evento de Producto</h4><p class="pf-desc">Diseño integral y coordinación de evento de lanzamiento en mercado español.</p><div class="pf-tags"><span class="pf-tag">Evento</span><span class="pf-tag">Producción</span><span class="pf-tag">Branding</span></div></div>
+            </div>
+          </div>
+        </div>
       </div>
+
+      <!-- AXESOR -->
       <div class="exp-row">
-        <div><h3 class="exp-co">Axesor</h3><div class="exp-loc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>Granada</div></div>
-        <div><h4 class="exp-role">Senior Graphic Designer &amp; UX/UI</h4><p class="exp-desc">Responsable de Branding y desarrollo de proyectos web. Diseño UX/UI de productos para las distintas líneas de negocio.</p></div>
-        <div><span class="exp-date-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>2014 — 2021</span></div>
+        <div class="exp-header">
+          <div>
+            <h3 class="exp-co">Axesor</h3>
+            <div class="exp-loc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>Granada</div>
+          </div>
+          <div>
+            <h4 class="exp-role">Senior Graphic Designer &amp; UX/UI</h4>
+            <p class="exp-desc">Responsable de Branding y desarrollo de proyectos web. Diseño UX/UI de productos para las distintas líneas de negocio.</p>
+            <button class="exp-portfolio-toggle" data-target="pf-axesor">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+              Ver destacados del proyecto
+            </button>
+          </div>
+          <div><span class="exp-date-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>2014 — 2021</span></div>
+        </div>
+        <div class="exp-portfolio" id="pf-axesor">
+          <div class="exp-portfolio-inner cols-2">
+            <div class="pf-card" onclick="openPfModal(5)">
+              <div class="pf-img"><div class="pf-img-ph"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg><span>Imagen del proyecto</span></div><div class="pf-overlay"><span class="pf-overlay-txt"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>Ver detalle</span></div></div>
+              <div class="pf-body"><div class="pf-cat">UX/UI Design</div><h4 class="pf-title">Redesign Web App Axesor</h4><p class="pf-desc">Rediseño integral de plataforma B2B: arquitectura, componentes y design system.</p><div class="pf-tags"><span class="pf-tag">Figma</span><span class="pf-tag">Design System</span><span class="pf-tag">UX Research</span></div></div>
+            </div>
+            <div class="pf-card" onclick="openPfModal(6)">
+              <div class="pf-img"><div class="pf-img-ph"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 17H7A5 5 0 0 1 7 7h2M15 7h2a5 5 0 0 1 0 10h-2M11 12h2"/></svg><span>Imagen del proyecto</span></div><div class="pf-overlay"><span class="pf-overlay-txt"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>Ver detalle</span></div></div>
+              <div class="pf-body"><div class="pf-cat">Digital PM</div><h4 class="pf-title">Lanzamiento Producto Digital</h4><p class="pf-desc">Coordinación end-to-end del lanzamiento de nueva línea de producto digital en España.</p><div class="pf-tags"><span class="pf-tag">PM</span><span class="pf-tag">Strategy</span><span class="pf-tag">Agile</span></div></div>
+            </div>
+          </div>
+        </div>
       </div>
+
+      <!-- SAANTS — sin portfolio -->
       <div class="exp-row">
-        <div><h3 class="exp-co">Saants DI</h3><div class="exp-loc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>Barcelona</div></div>
-        <div><h4 class="exp-role">Supervisor Marketing / Arte</h4><p class="exp-desc">Dirección de arte, estrategia on-off, publicidad, diseño web y redes sociales. Proyectos web, editorial y branding.</p></div>
-        <div><span class="exp-date-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>2010 — 2014</span></div>
+        <div class="exp-header">
+          <div><h3 class="exp-co">Saants DI</h3><div class="exp-loc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>Barcelona</div></div>
+          <div><h4 class="exp-role">Supervisor Marketing / Arte</h4><p class="exp-desc">Dirección de arte, estrategia on-off, publicidad, diseño web y redes sociales. Proyectos web, editorial y branding.</p></div>
+          <div><span class="exp-date-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>2010 — 2014</span></div>
+        </div>
       </div>
+
+      <!-- FREELANCE — sin portfolio -->
       <div class="exp-row">
-        <div><h3 class="exp-co">Freelance</h3><div class="exp-loc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>Barcelona · Remote</div></div>
-        <div><h4 class="exp-role">Diseñador &amp; Consultor Digital</h4><p class="exp-desc">Branding, proyectos web, material promocional, eventos y Community Manager.</p></div>
-        <div><span class="exp-date-badge exp-current"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>2010 — Act.</span></div>
+        <div class="exp-header">
+          <div><h3 class="exp-co">Freelance</h3><div class="exp-loc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>Barcelona · Remote</div></div>
+          <div><h4 class="exp-role">Diseñador &amp; Consultor Digital</h4><p class="exp-desc">Branding, proyectos web, material promocional, eventos y Community Manager.</p></div>
+          <div><span class="exp-date-badge exp-current"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>2010 — Act.</span></div>
+        </div>
       </div>
+
+      <!-- EAG / ADYTA / NTS — sin portfolio -->
       <div class="exp-row">
-        <div><h3 class="exp-co">EAG / Adyta / NTS</h3><div class="exp-loc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>Granada · Netherlands</div></div>
-        <div><h4 class="exp-role">Profesor · Diseñador Gráfico</h4><p class="exp-desc">Formación en proyectos online (EAG). Diseño web y branding (Adyta, NTS Koala Global).</p></div>
-        <div><span class="exp-date-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>2006 — 2014</span></div>
+        <div class="exp-header">
+          <div><h3 class="exp-co">EAG / Adyta / NTS</h3><div class="exp-loc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>Granada · Netherlands</div></div>
+          <div><h4 class="exp-role">Profesor · Diseñador Gráfico</h4><p class="exp-desc">Formación en proyectos online (EAG). Diseño web y branding (Adyta, NTS Koala Global).</p></div>
+          <div><span class="exp-date-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>2006 — 2014</span></div>
+        </div>
       </div>
+
     </div>
   </section>
 
+  <!-- SKILLS -->
   <section class="section" id="skills">
     <div class="section-header reveal">
       <div>
@@ -648,6 +887,7 @@ h4.edu-degree{font-size:11px;font-weight:700;color:var(--dark);line-height:1.4;m
     </div>
   </section>
 
+  <!-- FORMACIÓN -->
   <section class="section" id="formacion">
     <div class="section-header reveal">
       <div>
@@ -686,6 +926,7 @@ h4.edu-degree{font-size:11px;font-weight:700;color:var(--dark);line-height:1.4;m
     </div>
   </section>
 
+  <!-- CONTACT -->
   <section class="contact-section" id="contacto">
     <div class="contact-label">Contacto</div>
     <div class="contact-headline">
@@ -706,7 +947,20 @@ h4.edu-degree{font-size:11px;font-weight:700;color:var(--dark);line-height:1.4;m
     </div>
   </section>
 
-</div><script>
+</div>
+
+<script>
+/* ── PORTFOLIO DATA ────────────────────────── */
+const PF = [
+  {cat:'Branding & Marketing',title:'Rebranding Corporativo Internacional — Giunti',desc:'Rediseño completo de identidad visual corporativa para los mercados internacionales de Giunti Psychometrics. Definición de tono de voz, paleta cromática, sistema tipográfico y producción de assets para campañas globales.',tags:['Brand Identity','Estrategia','Adobe CC','International'],year:'2024 — 2025',client:'Giunti Psychometrics'},
+  {cat:'Campaña Integrada',title:'Campaña Corporativa Lanzamiento de Producto',desc:'Planificación y ejecución de campaña multi-mercado con producción multimedia. Coordinación de equipos regionales, producción de materiales y gestión de eventos de lanzamiento.',tags:['Campaña','PR','Eventos','Multi-mercado'],year:'2024 — 2025',client:'Giunti Psychometrics'},
+  {cat:'Branding & Marketing',title:'Identidad Corporativa Experian EMEA',desc:'Desarrollo y estandarización de la identidad visual para los mercados europeos de Experian. Sistema de design tokens, guía de marca completa y producción de assets para campañas integradas en 8 países.',tags:['Brand Identity','Design System','Adobe CC','EMEA'],year:'2022 — 2024',client:'Experian'},
+  {cat:'Motion & Campaña',title:'Campaña Motion Graphics Europa — Experian',desc:'Serie de piezas animadas para campaña de producto en mercados europeos. Motion graphics para redes sociales, display advertising y presentaciones corporativas.',tags:['After Effects','Motion Graphics','Social Media','Display'],year:'2023',client:'Experian'},
+  {cat:'Evento Corporativo',title:'Producción Evento de Producto — Experian',desc:'Diseño integral y coordinación de evento de lanzamiento de producto en mercado español. Identidad del evento, materiales, señalética y producción audiovisual.',tags:['Evento','Producción','Branding','Audiovisual'],year:'2022',client:'Experian'},
+  {cat:'UX/UI Design',title:'Redesign Web App Axesor',desc:'Rediseño integral de la plataforma principal de Axesor. Arquitectura de información, sistema de componentes reutilizables, guía de estilos y handoff a desarrollo. 18 meses de proyecto con impacto directo en retención de usuarios.',tags:['Figma','Design System','Web App','UX Research','Components'],year:'2018 — 2020',client:'Axesor'},
+  {cat:'Digital Project Manager',title:'Lanzamiento Producto Digital — Axesor',desc:'Coordinación end-to-end del lanzamiento de nueva línea de producto digital en el mercado español. Gestión de equipos de diseño, desarrollo y marketing. Control de timings, presupuestos y entregables.',tags:['PM','Strategy','Agile','Jira','Launch'],year:'2019',client:'Axesor'},
+];
+
 $(function(){
 
   /* ── GSAP + ScrollTrigger ── */
@@ -800,92 +1054,110 @@ $(function(){
     if(t.length){e.preventDefault();$('html,body').animate({scrollTop:t.offset().top-64},700,'swing');}
   });
 
-  /* ════════════════════════════════════
-     PDF GENERATION — jsPDF + html2canvas
-  ════════════════════════════════════ */
+  /* ── PORTFOLIO TOGGLE ── */
+  $('.exp-portfolio-toggle').on('click',function(){
+    const id   = $(this).data('target');
+    const panel= $('#'+id);
+    const btn  = $(this);
+    const isOpen = btn.hasClass('open');
+
+    if(isOpen){
+      btn.removeClass('open');
+      gsap.to(panel[0],{maxHeight:0,opacity:0,duration:.4,ease:'power3.inOut'});
+    } else {
+      btn.addClass('open');
+      const inner = panel.find('.exp-portfolio-inner')[0];
+      const h = inner.scrollHeight + 28;
+      panel.css('opacity',1);
+      gsap.fromTo(panel[0],
+        {maxHeight:0,opacity:0},
+        {maxHeight:h,opacity:1,duration:.5,ease:'power3.out'});
+      /* Animate cards on open */
+      gsap.fromTo(panel.find('.pf-card').toArray(),
+        {opacity:0,y:16},
+        {opacity:1,y:0,duration:.45,stagger:.08,ease:'power2.out',delay:.15});
+    }
+  });
+
+  /* ── PDF GENERATION ── */
   async function generatePDF(){
     const {jsPDF} = window.jspdf;
     $('#pdfOverlay').addClass('active');
-
     try {
       const source = document.querySelector('.page');
       const animated = source.querySelectorAll('*');
       const savedStyles = [];
       animated.forEach(el=>{
         savedStyles.push({el, opacity:el.style.opacity, transform:el.style.transform});
-        el.style.opacity='1';
-        el.style.transform='none';
+        el.style.opacity='1'; el.style.transform='none';
       });
-
       const canvas = await html2canvas(source,{
-        scale: 2,
-        useCORS: true,
-        allowTaint: true,
-        backgroundColor: '#ffffff',
-        width: source.scrollWidth,
-        height: source.scrollHeight,
-        windowWidth: 1100,
-        logging: false,
-        onclone: (clonedDoc) => {
+        scale:2, useCORS:true, allowTaint:true, backgroundColor:'#ffffff',
+        width:source.scrollWidth, height:source.scrollHeight, windowWidth:1100, logging:false,
+        onclone:(clonedDoc)=>{
           clonedDoc.querySelectorAll('*').forEach(el=>{
-            el.style.opacity='1';
-            el.style.transform='none';
-            el.style.transition='none';
-            el.style.animation='none';
+            el.style.opacity='1'; el.style.transform='none';
+            el.style.transition='none'; el.style.animation='none';
           });
-          ['#progressBar','#scrollTop','#pdfOverlay']
-            .forEach(sel=>{ const n=clonedDoc.querySelector(sel); if(n) n.style.display='none'; });
+          ['#progressBar','#scrollTop','#pdfOverlay','.exp-portfolio','.pf-modal-overlay']
+            .forEach(sel=>{ clonedDoc.querySelectorAll(sel).forEach(n=>n.style.display='none'); });
         }
       });
-
       savedStyles.forEach(({el,opacity,transform})=>{
-        el.style.opacity=opacity;
-        el.style.transform=transform;
+        el.style.opacity=opacity; el.style.transform=transform;
       });
-
-      const A4_W = 210, A4_H = 297;
-      const imgW  = canvas.width, imgH = canvas.height;
-      const ratio   = A4_W / (imgW / 2);
-      const totalMM = (imgH / 2) * ratio;
-
-      const pdf = new jsPDF({orientation:'portrait',unit:'mm',format:'a4',compress:true});
-      const pageHeightPx = Math.floor((A4_H / ratio) * 2);
-
-      let pageIndex = 0;
-      let remainingH = imgH;
-
-      while(remainingH > 0){
-        const sliceH = Math.min(pageHeightPx, remainingH);
-        const offsetY = pageIndex * pageHeightPx;
-
-        const sliceCanvas = document.createElement('canvas');
-        sliceCanvas.width  = imgW;
-        sliceCanvas.height = sliceH;
-        const ctx = sliceCanvas.getContext('2d');
-        ctx.drawImage(canvas, 0, -offsetY);
-
-        const imgData = sliceCanvas.toDataURL('image/jpeg', 0.95);
-        const sliceMMH = (sliceH / 2) * ratio;
-
-        if(pageIndex > 0) pdf.addPage();
-        pdf.addImage(imgData,'JPEG', 0, 0, A4_W, sliceMMH, '', 'FAST');
-
-        remainingH -= sliceH;
-        pageIndex++;
+      const A4_W=210, A4_H=297, imgW=canvas.width, imgH=canvas.height;
+      const ratio=A4_W/(imgW/2);
+      const pdf=new jsPDF({orientation:'portrait',unit:'mm',format:'a4',compress:true});
+      const pageHeightPx=Math.floor((A4_H/ratio)*2);
+      let pageIndex=0, remainingH=imgH;
+      while(remainingH>0){
+        const sliceH=Math.min(pageHeightPx,remainingH);
+        const offsetY=pageIndex*pageHeightPx;
+        const sliceCanvas=document.createElement('canvas');
+        sliceCanvas.width=imgW; sliceCanvas.height=sliceH;
+        sliceCanvas.getContext('2d').drawImage(canvas,0,-offsetY);
+        const imgData=sliceCanvas.toDataURL('image/jpeg',.95);
+        const sliceMMH=(sliceH/2)*ratio;
+        if(pageIndex>0) pdf.addPage();
+        pdf.addImage(imgData,'JPEG',0,0,A4_W,sliceMMH,'','FAST');
+        remainingH-=sliceH; pageIndex++;
       }
-
       pdf.save('Albert_Escrichs_CV_2026.pdf');
-
     } catch(err){
-      console.error('PDF error:', err);
+      console.error('PDF error:',err);
       alert('No se pudo generar el PDF. Por favor usa Ctrl+P / Cmd+P como alternativa.');
     }
-
     $('#pdfOverlay').removeClass('active');
   }
 
   $('#downloadPdf, #downloadPdfMobile').on('click', generatePDF);
 
+});
+
+/* ── PORTFOLIO MODAL ────────────────────────── */
+function openPfModal(i){
+  const p=PF[i]; if(!p) return;
+  $('#pfModalCat').text(p.cat);
+  $('#pfModalTitle').text(p.title);
+  $('#pfModalDesc').text(p.desc);
+  $('#pfModalTags').html(p.tags.map(t=>`<span class="tag">${t}</span>`).join(''));
+  $('#pfModalMeta').html(`
+    <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>${p.year}</span>
+    <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>${p.client}</span>
+  `);
+  $('#pfModalOv').addClass('open');
+  $('body').css('overflow','hidden');
+}
+function closePfModal(){
+  $('#pfModalOv').removeClass('open');
+  $('body').css('overflow','');
+}
+$('#pfModalOv').on('click',function(e){
+  if(!$(e.target).closest('#pfModal').length) closePfModal();
+});
+$(document).on('keydown',function(e){
+  if(e.key==='Escape') closePfModal();
 });
 </script>
 </body>
